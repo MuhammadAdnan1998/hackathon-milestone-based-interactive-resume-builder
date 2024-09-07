@@ -37,3 +37,32 @@ resumeForm.addEventListener('submit', (event) => {
   // Clear the form after submission
   resumeForm.reset();
 });
+
+// Make sections editable on click
+function makeEditable(element: HTMLElement) {
+  element.addEventListener('click', () => {
+    element.setAttribute('contenteditable', 'true');
+    element.focus();
+  });
+
+  // Save changes when the element loses focus or Enter is pressed
+  element.addEventListener('blur', () => {
+    element.removeAttribute('contenteditable');
+  });
+
+  element.addEventListener('keydown', (event: KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent adding a new line
+      element.blur(); // Trigger blur to save the changes
+    }
+  });
+}
+
+// Make all sections editable
+makeEditable(nameField);
+makeEditable(emailField);
+makeEditable(phoneField);
+makeEditable(addressField);
+makeEditable(educationField);
+makeEditable(experienceField);
+makeEditable(skillsField);

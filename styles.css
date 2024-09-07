@@ -117,3 +117,9 @@ textarea {
   margin-bottom: 8px;
   font-size: 16px;
 }
+
+[contenteditable="true"] {
+  border: 1px dashed #2980b9;
+  background-color: #f0f8ff;
+  padding: 5px;
+}
