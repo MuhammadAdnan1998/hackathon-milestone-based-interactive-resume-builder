@@ -7,58 +7,60 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+  <!-- Header Section -->
   <header>
     <h1>Dynamic Resume - Engr. Muhammad Adnan</h1>
   </header>
 
-  <!-- Form Section -->
+
+  <!-- Resume Form Section -->
   <section id="resume-form">
     <h2>Build Resume</h2>
     <form id="resumeBuilderForm">
-      <!-- Personal Information -->
+
+      <!-- Personal Information Section -->
       <div class="form-group">
         <h3>Personal Information</h3>
         <label for="name">Name</label>
         <input type="text" id="name" name="name" placeholder="Enter your full name" required>
-
+        
         <label for="email">Email</label>
         <input type="email" id="email" name="email" placeholder="Enter your email" required>
-
+  
         <label for="phone">Phone</label>
         <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" pattern="^\+92\s\d{3}\s\d{7}$" required>
         <small>Format: +92 123 1234567</small>
-
-
+  
         <label for="address">Address</label>
         <textarea id="address" name="address" rows="2" placeholder="Enter your address" required></textarea>
       </div>
-
+      
       <!-- Education Section -->
       <div class="form-group">
         <h3>Education</h3>
-        <label for="education"></label>
         <textarea id="education" name="education" rows="3" placeholder="Enter your educational background" required></textarea>
       </div>
-
+  
       <!-- Work Experience Section -->
       <div class="form-group">
         <h3>Work Experience</h3>
-        <label for="experience"></label>
         <textarea id="experience" name="experience" rows="3" placeholder="Enter your work experience" required></textarea>
       </div>
-
+  
       <!-- Skills Section -->
       <div class="form-group">
         <h3>Skills (comma-separated)</h3>
-        <label for="skills"></label>
-        <input type="text" id="skills" name="skills" placeholder="E.g., HTML, CSS, JavaScript, TypeScript, Next JS" required>
+        <input type="text" id="skills" name="skills" placeholder="E.g., HTML, CSS, JavaScript" required>
       </div>
-
+  
       <button type="submit" class="submit-btn">Generate Resume</button>
     </form>
   </section>
 
-  <!-- Resume Preview Section -->
+
+
+  <!-- Resume Preview Section   -->
   <section id="resume-preview">
     <h2>My Resume</h2>
     <div id="personal-info">
@@ -68,23 +70,23 @@
       <p><strong>Phone:</strong> <span id="dynamic-phone"></span></p>
       <p><strong>Address:</strong> <span id="dynamic-address"></span></p>
     </div>
-
+  
     <div id="education-section">
       <h3>Education</h3>
       <ul id="dynamic-education"></ul>
     </div>
-
+  
     <div id="work-experience-section">
       <h3>Work Experience</h3>
       <ul id="dynamic-experience"></ul>
     </div>
-
+  
     <div id="skills-section">
       <h3>Skills</h3>
       <ul id="dynamic-skills"></ul>
     </div>
   </section>
-
+  
   <script src="script.js" type="module"></script>
 </body>
 </html>
