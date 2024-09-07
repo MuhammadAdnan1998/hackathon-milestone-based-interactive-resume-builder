@@ -26,7 +26,46 @@ header {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Submit Button */
+#resume-form h2 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: #f9f9f9;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #2980b9;
+  background-color: #fff;
+}
+
+textarea {
+  resize: none;
+}
+
 .submit-btn {
   display: block;
   width: 100%;
@@ -39,6 +78,48 @@ header {
   cursor: pointer;
   margin-top: 20px;
 }
+
 .submit-btn:hover {
   background-color: #1e5980;
+}
+
+/* Resume Preview Styling */
+#resume-preview {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#resume-preview h2 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.resume-section h3 {
+  color: #2980b9;
+  border-bottom: 2px solid #2980b9;
+  padding-bottom: 5px;
+}
+
+.resume-section ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.resume-section ul li {
+  padding: 8px;
+  background-color: #f9f9f9;
+  border-left: 4px solid #2980b9;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+[contenteditable="true"] {
+  border: 1px dashed #2980b9;
+  background-color: #f0f8ff;
+  padding: 5px;
 }

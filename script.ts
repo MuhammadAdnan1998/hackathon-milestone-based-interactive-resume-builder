@@ -8,11 +8,11 @@ const educationField = document.getElementById('dynamic-education') as HTMLEleme
 const experienceField = document.getElementById('dynamic-experience') as HTMLElement;
 const skillsField = document.getElementById('dynamic-skills') as HTMLElement;
 
-
-// Handle Form Submission
+// Add event listener for form submission
 resumeForm.addEventListener('submit', (event) => {
   event.preventDefault();
 
+  // Get input values
   const name = (document.getElementById('name') as HTMLInputElement).value;
   const email = (document.getElementById('email') as HTMLInputElement).value;
   const phone = (document.getElementById('phone') as HTMLInputElement).value;
@@ -21,35 +21,48 @@ resumeForm.addEventListener('submit', (event) => {
   const experience = (document.getElementById('experience') as HTMLTextAreaElement).value;
   const skills = (document.getElementById('skills') as HTMLInputElement).value.split(',');
 
+  // Update resume fields dynamically
   nameField.textContent = name;
   emailField.textContent = email;
   phoneField.textContent = phone;
   addressField.textContent = address;
 
+  // Education and experience can be multi-line entries, so treat them as lists
   educationField.innerHTML = `<li>${education.replace(/\n/g, '</li><li>')}</li>`;
   experienceField.innerHTML = `<li>${experience.replace(/\n/g, '</li><li>')}</li>`;
 
+  // Skills is a comma-separated input, so split and render as a list
   skillsField.innerHTML = skills.map(skill => `<li>${skill.trim()}</li>`).join('');
 
+  // Clear the form after submission
   resumeForm.reset();
 });
 
-
-// Editable Fields
+// Make sections editable on click
 function makeEditable(element: HTMLElement) {
   element.addEventListener('click', () => {
     element.setAttribute('contenteditable', 'true');
     element.focus();
   });
 
+  // Save changes when the element loses focus or Enter is pressed
   element.addEventListener('blur', () => {
     element.removeAttribute('contenteditable');
   });
 
   element.addEventListener('keydown', (event: KeyboardEvent) => {
     if (event.key === 'Enter') {
-      event.preventDefault();
-      element.blur();
+      event.preventDefault(); // Prevent adding a new line
+      element.blur(); // Trigger blur to save the changes
     }
   });
 }
+
+// Make all sections editable
+makeEditable(nameField!);
+makeEditable(emailField!);
+makeEditable(phoneField!);
+makeEditable(addressField!);
+makeEditable(educationField!);
+makeEditable(experienceField!);
+makeEditable(skillsField!);
