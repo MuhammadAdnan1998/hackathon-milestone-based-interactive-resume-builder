@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -54,6 +54,87 @@
               <li>Karachi Tools Dies & Moulds Centre, June 2019</li>
             </ul>
       </li>
+    </ul>
+  </section>
+
+  <button id="toggle-skills">Toggle Skills</button>
+
+  <script src="script.js"></script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume - Engr. Muhammad Adnan</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Dynamic Resume Builder - Engr. Muhammad Adnan</h1>
+  </header>
+
+  <!-- Form Section -->
+  <section id="resume-form">
+    <h2>Enter Your Details</h2>
+    <form id="resumeBuilderForm">
+      <h3>Personal Information</h3>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      <label for="phone">Phone:</label>
+      <input type="tel" id="phone" name="phone" required>
+      <label for="address">Address:</label>
+      <input type="text" id="address" name="address" required>
+      
+      <h3>Education</h3>
+      <label for="education">Education (Degree, School, Years):</label>
+      <textarea id="education" name="education" required></textarea>
+      
+      <h3>Work Experience</h3>
+      <label for="experience">Experience (Job Title, Company, Years):</label>
+      <textarea id="experience" name="experience" required></textarea>
+      
+      <h3>Skills</h3>
+      <label for="skills">Skills (Comma-separated):</label>
+      <input type="text" id="skills" name="skills" required>
+      
+      <button type="submit">Generate Resume</button>
+    </form>
+  </section>
+
+  <!-- Dynamic Resume Section -->
+  <section id="personal-info" class="resume-section">
+    <h2>Personal Information</h2>
+    <img src="profile-picture.jpeg" alt="Profile Picture">
+    <p><strong>Name:</strong> <span id="dynamic-name">Muhammad Adnan</span></p>
+    <p><strong>Email:</strong> <a href="mailto:" id="dynamic-email">adnanshaikh84482@gmail.com</a></p>
+    <p><strong>Phone:</strong> <span id="dynamic-phone">+92 304 3712471</span></p>
+    <p><strong>Address:</strong> <span id="dynamic-address">FLT NO.304 3rd Floor, Plot No.A.M.362, Hilal Manzil, Babar St Off Akber Rd, Karachi, Sindh, Pakistan.</span></p>
+  </section>
+
+  <section id="education" class="resume-section">
+    <h2>Education</h2>
+    <ul id="dynamic-education">
+      <li>B.E. in Mechatronics Engineering, Mehran University of Engineering and Technology (2017 - 2021) - CGPA: 3.84/4.0</li>
+    </ul>
+  </section>
+
+  <section id="skills" class="resume-section">
+    <h2>Skills</h2>
+    <ul id="dynamic-skills">
+      <li><strong>Hardware:</strong> PLC Fatek Delta DVP-(40ES2), Delta HMI-(B074S11), etc.</li>
+    </ul>
+  </section>
+
+  <section id="experience" class="resume-section">
+    <h2>Work Experience</h2>
+    <ul id="dynamic-experience">
+      <li>Field Services Engineer/ Instrumentation - Prime Scientific Corporation (Feb 2023 - Present)</li>
     </ul>
   </section>
 
