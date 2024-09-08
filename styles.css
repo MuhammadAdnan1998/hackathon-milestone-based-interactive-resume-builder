@@ -128,7 +128,7 @@ textarea {
 #toggle-skills-btn {
   display: block;
   width: 100%;
-  background-color: #3498db;
+  background-color: #2980b9;
   color: white;
   padding: 10px;
   border: none;
@@ -140,5 +140,5 @@ textarea {
 }
 
 #toggle-skills-btn:hover {
-  background-color: #1e6fa5;
+  background-color: #1e5980;
 }
