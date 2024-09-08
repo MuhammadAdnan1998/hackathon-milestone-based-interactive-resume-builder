@@ -7,6 +7,8 @@ const addressField = document.getElementById('dynamic-address') as HTMLElement;
 const educationField = document.getElementById('dynamic-education') as HTMLElement;
 const experienceField = document.getElementById('dynamic-experience') as HTMLElement;
 const skillsField = document.getElementById('dynamic-skills') as HTMLElement;
+const skillsSection = document.getElementById('skills-section') as HTMLElement;
+const toggleSkillsBtn = document.getElementById('toggle-skills-btn') as HTMLButtonElement;
 
 // Add event listener for form submission
 resumeForm.addEventListener('submit', (event) => {
@@ -66,3 +68,14 @@ makeEditable(addressField!);
 makeEditable(educationField!);
 makeEditable(experienceField!);
 makeEditable(skillsField!);
+
+// Add event listener to toggle the visibility of the skills section
+toggleSkillsBtn.addEventListener('click', () => {
+  if (skillsSection.style.display === 'none') {
+    skillsSection.style.display = 'block';
+    toggleSkillsBtn.textContent = 'Hide Skills Section';
+  } else {
+    skillsSection.style.display = 'none';
+    toggleSkillsBtn.textContent = 'Show Skills Section';
+  }
+});
