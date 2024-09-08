@@ -1,3 +1,6 @@
+// If using the html2pdf as a global variable, add this declaration:
+declare var html2pdf: any;
+
 // Get form elements
 const resumeForm = document.getElementById('resumeBuilderForm') as HTMLFormElement;
 const nameField = document.getElementById('dynamic-name') as HTMLElement;
@@ -9,6 +12,8 @@ const experienceField = document.getElementById('dynamic-experience') as HTMLEle
 const skillsField = document.getElementById('dynamic-skills') as HTMLElement;
 const skillsSection = document.getElementById('skills-section') as HTMLElement;
 const toggleSkillsBtn = document.getElementById('toggle-skills-btn') as HTMLButtonElement;
+const copyLinkBtn = document.getElementById('copy-link-btn') as HTMLButtonElement;
+const downloadPDFBtn = document.getElementById('download-pdf-btn') as HTMLButtonElement;
 
 // Add event listener for form submission
 resumeForm.addEventListener('submit', (event) => {
@@ -38,6 +43,21 @@ resumeForm.addEventListener('submit', (event) => {
 
   // Clear the form after submission
   resumeForm.reset();
+
+  // Generate unique URL for the resume
+  const username = name.split(" ").join("").toLowerCase();  // Convert name to a URL-friendly username
+  const resumeURL = `${window.location.origin}/${username}/resume`;
+
+  // Display the resume URL
+  alert(`Your resume URL: ${resumeURL}`);
+  
+  // Optionally, store the resume data in localStorage for persistence
+  localStorage.setItem('resumeData', JSON.stringify({
+    name, email, phone, address, education, experience, skills
+  }));
+
+  // Redirect user to their unique resume page (optional)
+  window.history.pushState({}, '', `${username}/resume`);
 });
 
 // Make sections editable on click
@@ -47,7 +67,7 @@ function makeEditable(element: HTMLElement) {
     element.focus();
   });
 
-  // Save changes when the element loses focus or Enter is pressed
+  // Save changes when the element lose focus or Enter is pressed
   element.addEventListener('blur', () => {
     element.removeAttribute('contenteditable');
   });
@@ -78,4 +98,24 @@ toggleSkillsBtn.addEventListener('click', () => {
     skillsSection.style.display = 'none';
     toggleSkillsBtn.textContent = 'Show Skills Section';
   }
+});
+
+// Copy resume link to clipboard
+copyLinkBtn.addEventListener('click', () => {
+  const resumeURL = `${window.location.href}`;
+  navigator.clipboard.writeText(resumeURL).then(() => {
+    alert('Resume link copied to clipboard!');
+  });
+});
+
+// Download resume as PDF using html2pdf.js
+downloadPDFBtn.addEventListener('click', () => {
+  const resume = document.getElementById('resume-preview') as HTMLElement;
+  html2pdf(resume, {
+    margin: 1,
+    filename: 'resume.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+  });
 });
