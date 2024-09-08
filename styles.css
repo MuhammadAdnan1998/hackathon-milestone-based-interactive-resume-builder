@@ -96,12 +96,12 @@ button:focus {
   display: flex;
   justify-content: space-between;
   gap: 10px;
+  padding: 0 20px; /* Adds padding on left and right */
 }
 
 .button-container button {
   width: 48%;
 }
-
 
 /* Resume Preview Styling */
 #resume-preview {
