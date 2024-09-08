@@ -13,7 +13,7 @@ const skillsField = document.getElementById('dynamic-skills') as HTMLElement;
 const skillsSection = document.getElementById('skills-section') as HTMLElement;
 const toggleSkillsBtn = document.getElementById('toggle-skills-btn') as HTMLButtonElement;
 const copyLinkBtn = document.getElementById('copy-link-btn') as HTMLButtonElement;
-const downloadPDFBtn = document.getElementById('download-pdf-btn') as HTMLButtonElement;
+const downloadPdfBtn = document.getElementById('download-pdf-btn') as HTMLButtonElement;
 
 // Add event listener for form submission
 resumeForm.addEventListener('submit', (event) => {
@@ -102,20 +102,28 @@ toggleSkillsBtn.addEventListener('click', () => {
 
 // Copy resume link to clipboard
 copyLinkBtn.addEventListener('click', () => {
-  const resumeURL = `${window.location.href}`;
-  navigator.clipboard.writeText(resumeURL).then(() => {
+  // Extract the username (assuming it's their full name)
+  const usernameInput = (document.getElementById('name') as HTMLInputElement).value;
+  
+  // Generate a unique URL using the username (you can modify this to fit your app)
+  const formattedUsername = usernameInput.trim().toLowerCase().replace(/\s+/g, '-'); // Replace spaces with hyphens
+  const resumeUrl = `${window.location.origin}/${formattedUsername}/resume`;
+
+  // Copy to clipboard
+  navigator.clipboard.writeText(resumeUrl).then(() => {
     alert('Resume link copied to clipboard!');
+  }).catch(err => {
+    console.error('Failed to copy the link: ', err);
   });
 });
 
 // Download resume as PDF using html2pdf.js
-downloadPDFBtn.addEventListener('click', () => {
-  const resume = document.getElementById('resume-preview') as HTMLElement;
-  html2pdf(resume, {
-    margin: 1,
-    filename: 'resume.pdf',
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-  });
+downloadPdfBtn.addEventListener('click', () => {
+  const resumeElement = document.getElementById('resume-preview');
+  
+  if (resumeElement) {
+    html2pdf().from(resumeElement).save('resume.pdf');
+  } else {
+    console.error('Resume preview not found.');
+  }
 });
