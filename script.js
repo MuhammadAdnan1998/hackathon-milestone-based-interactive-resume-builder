@@ -10,6 +10,8 @@ const experienceField = document.getElementById('dynamic-experience');
 const skillsField = document.getElementById('dynamic-skills');
 const skillsSection = document.getElementById('skills-section');
 const toggleSkillsBtn = document.getElementById('toggle-skills-btn');
+const copyLinkBtn = document.getElementById('copy-link-btn');
+const downloadPdfBtn = document.getElementById('download-pdf-btn');
 // Add event listener for form submission
 resumeForm.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -33,6 +35,17 @@ resumeForm.addEventListener('submit', (event) => {
     skillsField.innerHTML = skills.map(skill => `<li>${skill.trim()}</li>`).join('');
     // Clear the form after submission
     resumeForm.reset();
+    // Generate unique URL for the resume
+    const username = name.split(" ").join("").toLowerCase(); // Convert name to a URL-friendly username
+    const resumeURL = `${window.location.origin}/${username}/resume`;
+    // Display the resume URL
+    alert(`Your resume URL: ${resumeURL}`);
+    // Optionally, store the resume data in localStorage for persistence
+    localStorage.setItem('resumeData', JSON.stringify({
+        name, email, phone, address, education, experience, skills
+    }));
+    // Redirect user to their unique resume page (optional)
+    window.history.pushState({}, '', `${username}/resume`);
 });
 // Make sections editable on click
 function makeEditable(element) {
@@ -40,7 +53,7 @@ function makeEditable(element) {
         element.setAttribute('contenteditable', 'true');
         element.focus();
     });
-    // Save changes when the element loses focus or Enter is pressed
+    // Save changes when the element lose focus or Enter is pressed
     element.addEventListener('blur', () => {
         element.removeAttribute('contenteditable');
     });
@@ -68,5 +81,29 @@ toggleSkillsBtn.addEventListener('click', () => {
     else {
         skillsSection.style.display = 'none';
         toggleSkillsBtn.textContent = 'Show Skills Section';
+    }
+});
+// Copy resume link to clipboard
+copyLinkBtn.addEventListener('click', () => {
+    // Extract the username (assuming it's their full name)
+    const usernameInput = document.getElementById('name').value;
+    // Generate a unique URL using the username (you can modify this to fit your app)
+    const formattedUsername = usernameInput.trim().toLowerCase().replace(/\s+/g, '-'); // Replace spaces with hyphens
+    const resumeUrl = `${window.location.origin}/${formattedUsername}/resume`;
+    // Copy to clipboard
+    navigator.clipboard.writeText(resumeUrl).then(() => {
+        alert('Resume link copied to clipboard!');
+    }).catch(err => {
+        console.error('Failed to copy the link: ', err);
+    });
+});
+// Download resume as PDF using html2pdf.js
+downloadPdfBtn.addEventListener('click', () => {
+    const resumeElement = document.getElementById('resume-preview');
+    if (resumeElement) {
+        html2pdf().from(resumeElement).save('resume.pdf');
+    }
+    else {
+        console.error('Resume preview not found.');
     }
 });
