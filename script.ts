@@ -1,5 +1,3 @@
-var html2pdf: any;
-
 document.addEventListener("DOMContentLoaded", () => {
   // Handle the Add More Skills Button
   const addSkillBtn: HTMLElement | null = document.getElementById("add-skill-btn");
@@ -62,42 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
       // Show the resume section after generation
       const resumeSection: HTMLElement | null = document.querySelector(".resume");
       if (resumeSection) resumeSection.style.display = "block";
-    });
-  }
-
-  // Download PDF Button Logic
-  const downloadResumeBtn: HTMLElement | null = document.getElementById("download-resume");
-
-  if (downloadResumeBtn) {
-    downloadResumeBtn.addEventListener("click", () => {
-      const resumeSection: HTMLElement | null = document.querySelector(".resume");
-      if (resumeSection) {
-        const options = {
-          filename: "resume.pdf", // File name for the PDF
-          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }, // PDF settings
-        };
-        html2pdf().from(resumeSection).set(options).save();
-      }
-    });
-  }
-
-  // Generate Shareable Link Button Logic
-  const generateLinkBtn: HTMLElement | null = document.getElementById("generate-link-btn");
-
-  if (generateLinkBtn) {
-    generateLinkBtn.addEventListener("click", () => {
-      // Create a shareable link (simple example)
-      const resumeLink: string = window.location.href; // Can be changed to a dynamic link
-      const shareableLinkElement: HTMLElement | null = document.getElementById("shareable-link");
-
-      if (shareableLinkElement) {
-        shareableLinkElement.innerHTML = `Share your resume: <a href="${resumeLink}" target="_blank">${resumeLink}</a>`;
-      }
-
-      // Copy the link to clipboard
-      navigator.clipboard.writeText(resumeLink).then(() => {
-        alert("Link copied to clipboard!");
-      });
     });
   }
 });
