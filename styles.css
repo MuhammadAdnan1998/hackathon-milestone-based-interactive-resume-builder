@@ -46,7 +46,7 @@ p {
 .form-field label {
   font-weight: bold;
   text-align: left;
-  width: 100px; /* Adjust width to ensure label and input are inline */
+  width: 100px;
 }
 
 .form-section input {
@@ -77,4 +77,11 @@ button:hover {
 #shareable-link a {
   color: #007bff;
   text-decoration: none;
+}
+
+/* Styling for the additional skills input section */
+#additional-skills {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }

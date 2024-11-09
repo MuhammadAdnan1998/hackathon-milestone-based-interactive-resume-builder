@@ -1,106 +1,63 @@
 "use strict";
-function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-function isValidPhone(phone) {
-    const phoneRegex = /^[0-9]+$/;
-    return phoneRegex.test(phone);
-}
-// Function to update the resume fields based on user input
-function updateResume() {
-    var _a;
-    const userNameInput = document.getElementById("user-input").value;
-    const userEmailInput = document.getElementById("user-email").value;
-    const userPhoneInput = document.getElementById("user-phone").value;
-    const userEducationInput = document.getElementById("user-Education").value;
-    const userExperienceInput = document.getElementById("user-Experience").value;
-    // Validation checks for email and phone
-    if (!userNameInput.trim() || !userEmailInput.trim() || !userPhoneInput.trim() || !userEducationInput.trim()) {
-        alert("Please fill in all required fields.");
-        return;
-    }
-    if (!isValidEmail(userEmailInput)) {
-        alert("Please enter a valid email address.");
-        return;
-    }
-    if (!isValidPhone(userPhoneInput)) {
-        alert("Please enter a valid phone number (only numbers).");
-        return;
-    }
-    const userResume = document.querySelector(".resume");
-    userResume.style.display = "block";
-    // Update resume fields
-    document.getElementById("name").textContent = userNameInput;
-    document.getElementById("email").textContent = userEmailInput;
-    document.getElementById("phone").textContent = userPhoneInput;
-    document.getElementById("user-edu").textContent = userEducationInput;
-    document.getElementById("user-exp").textContent = userExperienceInput;
-    // Skills
-    const skillsInput = document.getElementById("skillsInput").value;
-    const skillsArray = skillsInput.split(",").map((skill) => skill.trim()).filter((skill) => skill.length > 0);
-    const listElement = document.getElementById("skillsList");
-    listElement.innerHTML = "";
-    skillsArray.forEach((skill) => {
-        const listItem = document.createElement("li");
-        listItem.textContent = skill;
-        listElement.appendChild(listItem);
-    });
-    downloadResume();
-    makeSectionsEditable();
-    (_a = document.getElementById("generate-link-btn")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", generateShareableLink);
-}
-// Function to enable downloading the resume as a PDF
-function downloadResume() {
-    const downloadBtn = document.getElementById("download-resume");
-    downloadBtn === null || downloadBtn === void 0 ? void 0 : downloadBtn.addEventListener("click", function () {
-        const resumeElement = document.querySelector(".container");
-        if (resumeElement) {
-            const opt = {
-                margin: 1,
-                filename: "My-Resume.pdf",
-                image: { type: "jpeg", quality: 0.98 },
-                html2canvas: { scale: 2 },
-                jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-            };
-            html2pdf().from(resumeElement).set(opt).save();
-        }
-        else {
-            alert("Resume element not found!");
-        }
-    });
-}
-// Function to make sections editable
-function makeSectionsEditable() {
-    const editableElements = document.querySelectorAll("[contenteditable='true']");
-    editableElements.forEach((element) => {
-        element.addEventListener("input", () => {
-            var _a;
-            const elementId = element.id;
-            const updatedContent = ((_a = element.textContent) === null || _a === void 0 ? void 0 : _a.trim()) || "";
-            console.log(`Updated ${elementId}: ${updatedContent}`);
-        });
-    });
-}
-// Function to generate a shareable link for the resume
-function generateShareableLink() {
-    var _a;
-    const userName = (_a = document.getElementById("name")) === null || _a === void 0 ? void 0 : _a.textContent;
-    if (userName === null || userName === void 0 ? void 0 : userName.trim()) {
-        const encodedName = encodeURIComponent(userName.trim());
-        const currentUrl = window.location.href.split('?')[0];
-        const shareableLink = `${currentUrl}?user=${encodedName}`;
-        const linkElement = document.getElementById("shareable-link");
-        if (linkElement) {
-            linkElement.innerHTML = `<a href="${shareableLink}" target="_blank">${shareableLink}</a>`;
-        }
-    }
-    else {
-        alert("Please enter a valid username.");
-    }
-}
-// Initializing the functions once the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
+    // Handle the Add More Skills Button
+    const addSkillBtn = document.getElementById("add-skill-btn");
+    const additionalSkillsContainer = document.getElementById("additional-skills");
+    if (addSkillBtn && additionalSkillsContainer) {
+        addSkillBtn.addEventListener("click", () => {
+            // Create a new input element for adding additional skills
+            const skillInput = document.createElement("input");
+            skillInput.type = "text";
+            skillInput.placeholder = "Enter additional skill";
+            additionalSkillsContainer.appendChild(skillInput);
+        });
+    }
+    // Generate Resume Button Logic
     const generateResumeBtn = document.getElementById("generate-resume-btn");
-    generateResumeBtn === null || generateResumeBtn === void 0 ? void 0 : generateResumeBtn.addEventListener("click", updateResume);
+    if (generateResumeBtn) {
+        generateResumeBtn.addEventListener("click", () => {
+            // Retrieve user input for each section
+            const name = document.getElementById("user-input").value;
+            const email = document.getElementById("user-email").value;
+            const phone = document.getElementById("user-phone").value;
+            const education = document.getElementById("user-Education").value;
+            const experience = document.getElementById("user-Experience").value;
+            const skills = document.getElementById("skillsInput").value;
+            // Get additional skills from dynamically created input fields
+            const additionalSkills = Array.from((additionalSkillsContainer === null || additionalSkillsContainer === void 0 ? void 0 : additionalSkillsContainer.getElementsByTagName("input")) || [])
+                .map((input) => input.value)
+                .filter((value) => value !== "");
+            // Update the resume with the user's input
+            const nameElement = document.getElementById("name");
+            const emailElement = document.getElementById("email");
+            const phoneElement = document.getElementById("phone");
+            const eduElement = document.getElementById("user-edu");
+            const expElement = document.getElementById("user-exp");
+            if (nameElement)
+                nameElement.textContent = "Full Name: " + name;
+            if (emailElement)
+                emailElement.textContent = "Email: " + email;
+            if (phoneElement)
+                phoneElement.textContent = "Phone: " + phone;
+            if (eduElement)
+                eduElement.textContent = "Education: " + education;
+            if (expElement)
+                expElement.textContent = "Experience: " + experience;
+            // Combine the skills and display them on the resume
+            const allSkills = skills.split(",").concat(additionalSkills).filter((skill) => skill !== "");
+            const skillsList = document.getElementById("skillsList");
+            if (skillsList) {
+                skillsList.innerHTML = ""; // Clear any previously displayed skills
+                allSkills.forEach((skill) => {
+                    const li = document.createElement("li");
+                    li.textContent = skill;
+                    skillsList.appendChild(li);
+                });
+            }
+            // Show the resume section after generation
+            const resumeSection = document.querySelector(".resume");
+            if (resumeSection)
+                resumeSection.style.display = "block";
+        });
+    }
 });

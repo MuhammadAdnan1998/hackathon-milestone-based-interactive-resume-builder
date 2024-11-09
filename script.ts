@@ -1,105 +1,65 @@
-// Importing html2pdf library type
-declare var html2pdf: any;
-
-// Function to update the resume fields based on user input
-function updateResume(): void {
-  const userNameInput = (document.getElementById("user-input") as HTMLInputElement).value;
-  const userEmailInput = (document.getElementById("user-email") as HTMLInputElement).value;
-  const userPhoneInput = (document.getElementById("user-phone") as HTMLInputElement).value;
-  const userEducationInput = (document.getElementById("user-Education") as HTMLInputElement).value;
-  const userExperienceInput = (document.getElementById("user-Experience") as HTMLInputElement).value;
-
-  if (!userNameInput.trim() || !userEmailInput.trim() || !userPhoneInput.trim() || !userEducationInput.trim()) {
-    alert("Please fill in all required fields.");
-    return;
-  }
-
-  const userResume = document.querySelector(".resume") as HTMLElement;
-  userResume.style.display = "block";
-
-  const nameParagraph = document.getElementById("name") as HTMLParagraphElement;
-  nameParagraph.textContent = `Full Name: ${userNameInput}`;
-  const emailParagraph = document.getElementById("email") as HTMLParagraphElement;
-  emailParagraph.textContent = `Email: ${userEmailInput}`;
-  const userPhone = document.getElementById("phone") as HTMLParagraphElement;
-  userPhone.textContent = `Phone: ${userPhoneInput}`;
-  const userEdu = document.getElementById("user-edu") as HTMLParagraphElement;
-  userEdu.textContent = `Education: ${userEducationInput}`;
-  const userExp = document.getElementById("user-exp") as HTMLParagraphElement;
-  userExp.textContent = `Experience: ${userExperienceInput}`;
-
-  const inputElement = document.getElementById("skillsInput") as HTMLInputElement;
-  const skillsInput = inputElement.value;
-  const skillsArray = skillsInput.split(",").map((skill) => skill.trim()).filter((skill) => skill.length > 0);
-  const listElement = document.getElementById("skillsList") as HTMLUListElement;
-  listElement.innerHTML = "";
-  skillsArray.forEach((skill) => {
-    const listItem = document.createElement("li");
-    listItem.textContent = skill;
-    listElement.appendChild(listItem);
-  });
-
-  // Enable editable functionality
-  makeSectionsEditable();
-
-  // Adding event listeners for download and link generation
-  downloadResume();
-  makeSectionsEditable();
-  document.getElementById("generate-link-btn")?.addEventListener("click", generateShareableLink);
-}
-
-// Function to enable downloading the resume as a PDF
-function downloadResume(): void {
-  const downloadBtn = document.getElementById("download-resume");
-  downloadBtn?.addEventListener("click", function () {
-    const resumeElement = document.querySelector(".container");
-    if (resumeElement) {
-      const opt = {
-        margin: 1,
-        filename: "Resume.pdf",
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-      };
-      html2pdf().from(resumeElement).set(opt).save();
-    } else {
-      alert("Resume element not found!");
-    }
-  });
-}
-
-// Function to enable editable sections within the resume
-function makeSectionsEditable(): void {
-  const editableElements = document.querySelectorAll("[contenteditable='true']");
-  editableElements.forEach((element) => {
-    element.addEventListener("input", () => {
-      const elementId = element.id;
-      const updatedContent = element.textContent?.trim() || "";
-      console.log(`Updated ${elementId}: ${updatedContent}`);
-    });
-  });
-}
-
-// Function to generate a shareable link for the resume
-function generateShareableLink(): void {
-  const userName = (document.getElementById("name") as HTMLParagraphElement)?.textContent;
-  if (userName?.trim()) {
-    const encodedName = encodeURIComponent(userName.trim());
-    const currentUrl = window.location.href.split('?')[0];
-    const shareableLink = `${currentUrl}?user=${encodedName}`;
-    const linkElement = document.getElementById("shareable-link");
-    if (linkElement) {
-      linkElement.innerHTML = `<a href="${shareableLink}" target="_blank">${shareableLink}</a>`;
-    }
-  } else {
-    alert("Please enter a valid username.");
-  }
-}
-
-// Initializing the functions once the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
-  const generateResumeBtn = document.getElementById("generate-resume-btn");
+  // Handle the Add More Skills Button
+  const addSkillBtn: HTMLElement | null = document.getElementById("add-skill-btn");
+  const additionalSkillsContainer: HTMLElement | null = document.getElementById("additional-skills");
+
+  if (addSkillBtn && additionalSkillsContainer) {
+    addSkillBtn.addEventListener("click", () => {
+      // Create a new input element for adding additional skills
+      const skillInput: HTMLInputElement = document.createElement("input");
+      skillInput.type = "text";
+      skillInput.placeholder = "Enter additional skill";
+      additionalSkillsContainer.appendChild(skillInput);
+    });
+  }
+
+  // Generate Resume Button Logic
+  const generateResumeBtn: HTMLElement | null = document.getElementById("generate-resume-btn");
+
   if (generateResumeBtn) {
-    generateResumeBtn.addEventListener("click", updateResume);
+    generateResumeBtn.addEventListener("click", () => {
+      // Retrieve user input for each section
+      const name: string = (document.getElementById("user-input") as HTMLInputElement).value;
+      const email: string = (document.getElementById("user-email") as HTMLInputElement).value;
+      const phone: string = (document.getElementById("user-phone") as HTMLInputElement).value;
+      const education: string = (document.getElementById("user-Education") as HTMLInputElement).value;
+      const experience: string = (document.getElementById("user-Experience") as HTMLInputElement).value;
+      const skills: string = (document.getElementById("skillsInput") as HTMLInputElement).value;
+
+      // Get additional skills from dynamically created input fields
+      const additionalSkills: string[] = Array.from(additionalSkillsContainer?.getElementsByTagName("input") || [])
+        .map((input: HTMLInputElement) => input.value)
+        .filter((value: string) => value !== "");
+
+      // Update the resume with the user's input
+      const nameElement: HTMLElement | null = document.getElementById("name");
+      const emailElement: HTMLElement | null = document.getElementById("email");
+      const phoneElement: HTMLElement | null = document.getElementById("phone");
+      const eduElement: HTMLElement | null = document.getElementById("user-edu");
+      const expElement: HTMLElement | null = document.getElementById("user-exp");
+
+      if (nameElement) nameElement.textContent = "Full Name: " + name;
+      if (emailElement) emailElement.textContent = "Email: " + email;
+      if (phoneElement) phoneElement.textContent = "Phone: " + phone;
+      if (eduElement) eduElement.textContent = "Education: " + education;
+      if (expElement) expElement.textContent = "Experience: " + experience;
+
+      // Combine the skills and display them on the resume
+      const allSkills: string[] = skills.split(",").concat(additionalSkills).filter((skill: string) => skill !== "");
+      const skillsList: HTMLElement | null = document.getElementById("skillsList");
+
+      if (skillsList) {
+        skillsList.innerHTML = ""; // Clear any previously displayed skills
+        allSkills.forEach((skill: string) => {
+          const li: HTMLLIElement = document.createElement("li");
+          li.textContent = skill;
+          skillsList.appendChild(li);
+        });
+      }
+
+      // Show the resume section after generation
+      const resumeSection: HTMLElement | null = document.querySelector(".resume");
+      if (resumeSection) resumeSection.style.display = "block";
+    });
   }
 });
