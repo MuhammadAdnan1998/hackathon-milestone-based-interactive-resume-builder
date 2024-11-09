@@ -31,6 +31,18 @@ p {
   margin-bottom: 15px;
 }
 
+.form-section {
+  text-align: left;  /* Align input fields and labels to the left */
+  margin-top: 20px;
+}
+
+.input-label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  margin-top: 10px;  /* Adds space above each label */
+}
+
 .form-section input {
   width: 100%;
   margin: 5px 0;
