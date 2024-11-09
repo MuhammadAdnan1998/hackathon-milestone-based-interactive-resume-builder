@@ -1,6 +1,5 @@
 var html2pdf: any;
 
-
 document.addEventListener("DOMContentLoaded", () => {
   // Handle the Add More Skills Button
   const addSkillBtn: HTMLElement | null = document.getElementById("add-skill-btn");
