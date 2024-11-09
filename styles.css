@@ -6,6 +6,10 @@
   font-family: Arial, sans-serif;
 }
 
+.header{
+  justify-content: center;
+}
+
 /* Main Container */
 .container {
   max-width: 800px;
