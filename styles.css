@@ -32,20 +32,25 @@ p {
 }
 
 .form-section {
-  text-align: left;  /* Align input fields and labels to the left */
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.input-label {
+.form-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-field label {
   font-weight: bold;
-  display: block;
-  margin-bottom: 5px;
-  margin-top: 10px;  /* Adds space above each label */
+  text-align: left;
+  width: 100px; /* Adjust width to ensure label and input are inline */
 }
 
 .form-section input {
   width: 100%;
-  margin: 5px 0;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
