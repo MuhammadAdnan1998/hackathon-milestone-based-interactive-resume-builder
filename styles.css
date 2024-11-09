@@ -31,26 +31,9 @@ p {
   margin-bottom: 15px;
 }
 
-.form-section {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.form-field {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.form-field label {
-  font-weight: bold;
-  text-align: left;
-  width: 100px;
-}
-
 .form-section input {
   width: 100%;
+  margin: 5px 0;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -77,11 +60,4 @@ button:hover {
 #shareable-link a {
   color: #007bff;
   text-decoration: none;
-}
-
-/* Styling for the additional skills input section */
-#additional-skills {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 }
