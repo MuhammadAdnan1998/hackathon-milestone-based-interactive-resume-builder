@@ -1,164 +1,146 @@
-/* Global Styles */
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f0f4f8;
-  color: #333;
+/* General Reset */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-/* Header Styling */
-header {
-  background-color: #2c3e50;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  font-size: 24px;
-}
-
-/* Form Section Styling */
-#resume-form {
-  background-color: white;
+/* Main Container */
+.container {
   max-width: 800px;
-  margin: 30px auto;
+  margin: 20px auto;
   padding: 20px;
+  border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-#resume-form h2 {
-  text-align: center;
-  color: #2c3e50;
-  margin-bottom: 20px;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  background-color: #f9f9f9;
-}
-
-input:focus,
-textarea:focus {
-  outline: none;
-  border-color: #2980b9;
   background-color: #fff;
 }
 
-textarea {
-  resize: none;
-}
-
-/* Styling for the Form Submit, Toggle, Copy Link, and Download PDF Buttons */
-button {
-  display: block;
-  width: 100%;
-  background-color: #2980b9;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  font-size: 18px;
-  cursor: pointer;
-  margin-top: 20px;
-  text-align: center;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #1e5980;
-}
-
-button:focus {
-  outline: none;
-  box-shadow: 0 0 5px rgba(41, 128, 185, 0.8);
-}
-
-/* Button container to prevent full-width layout for individual buttons */
-.button-container {
+/* Form and Input Styling */
+.form-group {
   display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 0 20px; /* Adds padding on left and right */
+  flex-direction: column;
+  margin-bottom: 15px;
 }
 
-.button-container button {
-  width: 48%;
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
 }
 
-/* Resume Preview Styling */
-#resume-preview {
-  max-width: 800px;
-  margin: 30px auto;
-  padding: 20px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-#resume-preview h2 {
-  text-align: center;
-  color: #2c3e50;
-  margin-bottom: 20px;
-}
-
-.resume-section h3 {
-  color: #2980b9;
-  border-bottom: 2px solid #2980b9;
-  padding-bottom: 5px;
-}
-
-.resume-section ul {
-  list-style-type: none;
-  padding-left: 0;
-}
-
-.resume-section ul li {
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"] {
   padding: 8px;
-  background-color: #f9f9f9;
-  border-left: 4px solid #2980b9;
-  margin-bottom: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
   font-size: 16px;
 }
 
-[contenteditable="true"] {
-  border: 1px dashed #2980b9;
-  background-color: #f0f8ff;
-  padding: 5px;
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="tel"]:focus {
+  border-color: #007bff;
+  outline: none;
 }
 
-/* Styling for the Toggle Button
-#toggle-skills-btn {
-  display: block;
-  width: 100%;
-  background-color: #2980b9;
-  color: white;
-  padding: 10px;
+/* Buttons */
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
   border: none;
   border-radius: 4px;
-  font-size: 18px;
   cursor: pointer;
-  margin-top: 20px;
-  text-align: center;
+  margin-top: 10px;
 }
 
-#toggle-skills-btn:hover {
-  background-color: #1e5980;
-} */
+.button:hover {
+  background-color: #0056b3;
+}
+
+.button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+#download-resume {
+  margin-right: 10px;
+}
+
+/* Resume Section */
+.resume {
+  display: none;
+  margin-top: 20px;
+  padding: 20px;
+  border-top: 2px solid #007bff;
+}
+
+.resume h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.resume p {
+  font-size: 18px;
+  color: #555;
+}
+
+.resume ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.resume ul li {
+  font-size: 16px;
+  color: #333;
+  padding: 4px 0;
+}
+
+#skillsList li {
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  padding: 5px;
+  margin: 4px 0;
+}
+
+/* Editable Content */
+[contenteditable="true"] {
+  padding: 4px;
+  border-bottom: 1px dashed #ccc;
+  transition: background-color 0.2s;
+}
+
+[contenteditable="true"]:focus {
+  background-color: #e8f0fe;
+  outline: none;
+}
+
+/* Shareable Link Section */
+#shareable-link {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+#shareable-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+#shareable-link a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #888;
+}

@@ -1,129 +1,99 @@
-// If using the html2pdf as a global variable, add this declaration:
+// Importing html2pdf library type
 declare var html2pdf: any;
 
-// Get form elements
-const resumeForm = document.getElementById('resumeBuilderForm') as HTMLFormElement;
-const nameField = document.getElementById('dynamic-name') as HTMLElement;
-const emailField = document.getElementById('dynamic-email') as HTMLElement;
-const phoneField = document.getElementById('dynamic-phone') as HTMLElement;
-const addressField = document.getElementById('dynamic-address') as HTMLElement;
-const educationField = document.getElementById('dynamic-education') as HTMLElement;
-const experienceField = document.getElementById('dynamic-experience') as HTMLElement;
-const skillsField = document.getElementById('dynamic-skills') as HTMLElement;
-const skillsSection = document.getElementById('skills-section') as HTMLElement;
-const toggleSkillsBtn = document.getElementById('toggle-skills-btn') as HTMLButtonElement;
-const copyLinkBtn = document.getElementById('copy-link-btn') as HTMLButtonElement;
-const downloadPdfBtn = document.getElementById('download-pdf-btn') as HTMLButtonElement;
+// Function to update the resume fields based on user input
+function updateName(): void {
+  const userNameInput = (document.getElementById("user-input") as HTMLInputElement).value;
+  const userEmailInput = (document.getElementById("user-email") as HTMLInputElement).value;
+  const userPhoneInput = (document.getElementById("user-phone") as HTMLInputElement).value;
+  const userEducationInput = (document.getElementById("user-Education") as HTMLInputElement).value;
+  const userExperienceInput = (document.getElementById("user-Experience") as HTMLInputElement).value;
 
-// Add event listener for form submission
-resumeForm.addEventListener('submit', (event) => {
-  event.preventDefault();
+  if (!userNameInput.trim() || !userEmailInput.trim() || !userPhoneInput.trim() || !userEducationInput.trim()) {
+    alert("Please fill in all required fields.");
+    return;
+  }
 
-  // Get input values
-  const name = (document.getElementById('name') as HTMLInputElement).value;
-  const email = (document.getElementById('email') as HTMLInputElement).value;
-  const phone = (document.getElementById('phone') as HTMLInputElement).value;
-  const address = (document.getElementById('address') as HTMLTextAreaElement).value;
-  const education = (document.getElementById('education') as HTMLTextAreaElement).value;
-  const experience = (document.getElementById('experience') as HTMLTextAreaElement).value;
-  const skills = (document.getElementById('skills') as HTMLInputElement).value.split(',');
+  const userResume = document.querySelector(".resume") as HTMLElement;
+  userResume.style.display = "block";
 
-  // Update resume fields dynamically
-  nameField.textContent = name;
-  emailField.textContent = email;
-  phoneField.textContent = phone;
-  addressField.textContent = address;
+  const nameParagraph = document.getElementById("name") as HTMLParagraphElement;
+  nameParagraph.textContent = userNameInput;
+  const emailParagraph = document.getElementById("email") as HTMLParagraphElement;
+  emailParagraph.textContent = userEmailInput;
+  const userPhone = document.getElementById("phone") as HTMLParagraphElement;
+  userPhone.textContent = userPhoneInput;
+  const userEdu = document.getElementById("user-edu") as HTMLParagraphElement;
+  userEdu.textContent = userEducationInput;
+  const userExp = document.getElementById("user-exp") as HTMLParagraphElement;
+  userExp.textContent = userExperienceInput;
 
-  // Education and experience can be multi-line entries, so treat them as lists
-  educationField.innerHTML = `<li>${education.replace(/\n/g, '</li><li>')}</li>`;
-  experienceField.innerHTML = `<li>${experience.replace(/\n/g, '</li><li>')}</li>`;
-
-  // Skills is a comma-separated input, so split and render as a list
-  skillsField.innerHTML = skills.map(skill => `<li>${skill.trim()}</li>`).join('');
-
-  // Clear the form after submission
-  resumeForm.reset();
-
-  // Generate unique URL for the resume
-  const username = name.split(" ").join("").toLowerCase();  // Convert name to a URL-friendly username
-  const resumeURL = `${window.location.origin}/${username}/resume`;
-
-  // Display the resume URL
-  alert(`Your resume URL: ${resumeURL}`);
-  
-  // Optionally, store the resume data in localStorage for persistence
-  localStorage.setItem('resumeData', JSON.stringify({
-    name, email, phone, address, education, experience, skills
-  }));
-
-  // Redirect user to their unique resume page (optional)
-  window.history.pushState({}, '', `${username}/resume`);
-});
-
-// Make sections editable on click
-function makeEditable(element: HTMLElement) {
-  element.addEventListener('click', () => {
-    element.setAttribute('contenteditable', 'true');
-    element.focus();
+  const inputElement = document.getElementById("skillsInput") as HTMLInputElement;
+  const skillsInput = inputElement.value;
+  const skillsArray = skillsInput.split(",").map((skill) => skill.trim()).filter((skill) => skill.length > 0);
+  const listElement = document.getElementById("skillsList") as HTMLUListElement;
+  listElement.innerHTML = "";
+  skillsArray.forEach((skill) => {
+    const listItem = document.createElement("li");
+    listItem.textContent = skill;
+    listElement.appendChild(listItem);
   });
 
-  // Save changes when the element lose focus or Enter is pressed
-  element.addEventListener('blur', () => {
-    element.removeAttribute('contenteditable');
-  });
+  // Adding event listeners for download and link generation
+  downloadResume();
+  makeSectionsEditable();
+  document.getElementById("generate-link-btn")?.addEventListener("click", generateShareableLink);
+}
 
-  element.addEventListener('keydown', (event: KeyboardEvent) => {
-    if (event.key === 'Enter') {
-      event.preventDefault(); // Prevent adding a new line
-      element.blur(); // Trigger blur to save the changes
+// Function to enable downloading the resume as a PDF
+function downloadResume(): void {
+  const downloadBtn = document.getElementById("download-resume");
+  downloadBtn?.addEventListener("click", function () {
+    const resumeElement = document.querySelector(".container");
+    if (resumeElement) {
+      const opt = {
+        margin: 1,
+        filename: "Resume.pdf",
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+      };
+      html2pdf().from(resumeElement).set(opt).save();
+    } else {
+      alert("Resume element not found!");
     }
   });
 }
 
-// Make all sections editable
-makeEditable(nameField!);
-makeEditable(emailField!);
-makeEditable(phoneField!);
-makeEditable(addressField!);
-makeEditable(educationField!);
-makeEditable(experienceField!);
-makeEditable(skillsField!);
-
-// Add event listener to toggle the visibility of the skills section
-toggleSkillsBtn.addEventListener('click', () => {
-  if (skillsSection.style.display === 'none') {
-    skillsSection.style.display = 'block';
-    toggleSkillsBtn.textContent = 'Hide Skills Section';
-  } else {
-    skillsSection.style.display = 'none';
-    toggleSkillsBtn.textContent = 'Show Skills Section';
-  }
-});
-
-// Copy resume link to clipboard
-copyLinkBtn.addEventListener('click', () => {
-  // Extract the username (assuming it's their full name)
-  const usernameInput = (document.getElementById('name') as HTMLInputElement).value;
-  
-  // Generate a unique URL using the username (you can modify this to fit your app)
-  const formattedUsername = usernameInput.trim().toLowerCase().replace(/\s+/g, '-'); // Replace spaces with hyphens
-  const resumeUrl = `${window.location.origin}/${formattedUsername}/resume`;
-
-  // Copy to clipboard
-  navigator.clipboard.writeText(resumeUrl).then(() => {
-    alert('Resume link copied to clipboard!');
-  }).catch(err => {
-    console.error('Failed to copy the link: ', err);
+// Function to enable editable sections within the resume
+function makeSectionsEditable(): void {
+  const editableElements = document.querySelectorAll("[contenteditable='true']");
+  editableElements.forEach((element) => {
+    element.addEventListener("input", () => {
+      const elementId = element.id;
+      const updatedContent = element.textContent?.trim() || "";
+      console.log(`Updated ${elementId}: ${updatedContent}`);
+    });
   });
-});
+}
 
-// Download resume as PDF using html2pdf.js
-downloadPdfBtn.addEventListener('click', () => {
-  const resumeElement = document.getElementById('resume-preview');
-  
-  if (resumeElement) {
-    html2pdf().from(resumeElement).save('resume.pdf');
+// Function to generate a shareable link for the resume
+function generateShareableLink(): void {
+  const userName = (document.getElementById("name") as HTMLParagraphElement)?.textContent;
+  if (userName?.trim()) {
+    const encodedName = encodeURIComponent(userName.trim());
+    const currentUrl = window.location.href.split('?')[0];
+    const shareableLink = `${currentUrl}?user=${encodedName}`;
+    const linkElement = document.getElementById("shareable-link");
+    if (linkElement) {
+      linkElement.innerHTML = `<a href="${shareableLink}" target="_blank">${shareableLink}</a>`;
+    }
   } else {
-    console.error('Resume preview not found.');
+    alert("Please enter a valid username.");
   }
+}
+
+// Initializing the functions once the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", () => {
+  makeSectionsEditable();
 });
