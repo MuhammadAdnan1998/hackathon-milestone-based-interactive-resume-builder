@@ -54,29 +54,27 @@ function updateResume(): void {
     listElement.appendChild(listItem);
   });
 
-  downloadResume();
   makeSectionsEditable();
+
+  // Setup event listener for shareable link
   document.getElementById("generate-link-btn")?.addEventListener("click", generateShareableLink);
 }
 
 // Function to enable downloading the resume as a PDF
 function downloadResume(): void {
-  const downloadBtn = document.getElementById("download-resume");
-  downloadBtn?.addEventListener("click", function () {
-    const resumeElement = document.querySelector(".container");
-    if (resumeElement) {
-      const opt = {
-        margin: 1,
-        filename: "My-Resume.pdf",
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-      };
-      html2pdf().from(resumeElement).set(opt).save();
-    } else {
-      alert("Resume element not found!");
-    }
-  });
+  const resumeElement = document.querySelector(".container");
+  if (resumeElement) {
+    const opt = {
+      margin: 1,
+      filename: "My-Resume.pdf",
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+    };
+    html2pdf().from(resumeElement).set(opt).save();
+  } else {
+    alert("Resume element not found!");
+  }
 }
 
 // Function to make sections editable
@@ -111,4 +109,8 @@ function generateShareableLink(): void {
 document.addEventListener("DOMContentLoaded", () => {
   const generateResumeBtn = document.getElementById("generate-resume-btn");
   generateResumeBtn?.addEventListener("click", updateResume);
+
+  // Set up the download event listener once the DOM is loaded
+  const downloadBtn = document.getElementById("download-resume");
+  downloadBtn?.addEventListener("click", downloadResume);
 });
