@@ -10,5 +10,8 @@
   "description": "",
   "devDependencies": {
     "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "jsdom": "^25.0.1"
   }
 }

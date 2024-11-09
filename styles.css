@@ -62,6 +62,7 @@
   border-radius: 4px;
   cursor: pointer;
   margin-top: 10px;
+  justify-content: center;
 }
 
 .button:hover {
