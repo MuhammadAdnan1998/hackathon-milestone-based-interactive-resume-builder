@@ -12,6 +12,7 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
+    "html2pdf.js": "^0.10.2",
     "jsdom": "^25.0.1"
   }
 }

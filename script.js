@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var html2pdf;
 document.addEventListener("DOMContentLoaded", () => {
     // Handle the Add More Skills Button
     const addSkillBtn = document.getElementById("add-skill-btn");
@@ -24,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const experience = document.getElementById("user-Experience").value;
             const skills = document.getElementById("skillsInput").value;
             // Get additional skills from dynamically created input fields
-            const additionalSkills = Array.from((additionalSkillsContainer === null || additionalSkillsContainer === void 0 ? void 0 : additionalSkillsContainer.getElementsByTagName("input")) || [])
+            const additionalSkills = Array.from(additionalSkillsContainer?.getElementsByTagName("input") || [])
                 .map((input) => input.value)
                 .filter((value) => value !== "");
             // Update the resume with the user's input
@@ -58,6 +60,36 @@ document.addEventListener("DOMContentLoaded", () => {
             const resumeSection = document.querySelector(".resume");
             if (resumeSection)
                 resumeSection.style.display = "block";
+        });
+    }
+    // Download PDF Button Logic
+    const downloadResumeBtn = document.getElementById("download-resume");
+    if (downloadResumeBtn) {
+        downloadResumeBtn.addEventListener("click", () => {
+            const resumeSection = document.querySelector(".resume");
+            if (resumeSection) {
+                const options = {
+                    filename: "resume.pdf", // File name for the PDF
+                    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }, // PDF settings
+                };
+                html2pdf().from(resumeSection).set(options).save();
+            }
+        });
+    }
+    // Generate Shareable Link Button Logic
+    const generateLinkBtn = document.getElementById("generate-link-btn");
+    if (generateLinkBtn) {
+        generateLinkBtn.addEventListener("click", () => {
+            // Create a shareable link (simple example)
+            const resumeLink = window.location.href; // Can be changed to a dynamic link
+            const shareableLinkElement = document.getElementById("shareable-link");
+            if (shareableLinkElement) {
+                shareableLinkElement.innerHTML = `Share your resume: <a href="${resumeLink}" target="_blank">${resumeLink}</a>`;
+            }
+            // Copy the link to clipboard
+            navigator.clipboard.writeText(resumeLink).then(() => {
+                alert("Link copied to clipboard!");
+            });
         });
     }
 });
