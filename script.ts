@@ -1,28 +1,49 @@
 // Importing html2pdf library type
 declare var html2pdf: any;
 
+function isValidEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+function isValidPhone(phone: string): boolean {
+  const phoneRegex = /^[0-9]+$/;
+  return phoneRegex.test(phone);
+}
+
 // Function to update the resume fields based on user input
-function updateName(): void {
+function updateResume(): void {
   const userNameInput = (document.getElementById("user-input") as HTMLInputElement).value;
   const userEmailInput = (document.getElementById("user-email") as HTMLInputElement).value;
   const userPhoneInput = (document.getElementById("user-phone") as HTMLInputElement).value;
   const userEducationInput = (document.getElementById("user-Education") as HTMLInputElement).value;
   const userExperienceInput = (document.getElementById("user-Experience") as HTMLInputElement).value;
 
+  // Validation checks for email and phone
   if (!userNameInput.trim() || !userEmailInput.trim() || !userPhoneInput.trim() || !userEducationInput.trim()) {
     alert("Please fill in all required fields.");
+    return;
+  }
+  if (!isValidEmail(userEmailInput)) {
+    alert("Please enter a valid email address.");
+    return;
+  }
+  if (!isValidPhone(userPhoneInput)) {
+    alert("Please enter a valid phone number (only numbers).");
     return;
   }
 
   const userResume = document.querySelector(".resume") as HTMLElement;
   userResume.style.display = "block";
 
+  // Update resume fields
   (document.getElementById("name") as HTMLParagraphElement).textContent = userNameInput;
   (document.getElementById("email") as HTMLParagraphElement).textContent = userEmailInput;
   (document.getElementById("phone") as HTMLParagraphElement).textContent = userPhoneInput;
   (document.getElementById("user-edu") as HTMLParagraphElement).textContent = userEducationInput;
   (document.getElementById("user-exp") as HTMLParagraphElement).textContent = userExperienceInput;
 
+  // Skills
   const skillsInput = (document.getElementById("skillsInput") as HTMLInputElement).value;
   const skillsArray = skillsInput.split(",").map((skill) => skill.trim()).filter((skill) => skill.length > 0);
   const listElement = document.getElementById("skillsList") as HTMLUListElement;
@@ -40,7 +61,8 @@ function updateName(): void {
 
 // Function to enable downloading the resume as a PDF
 function downloadResume(): void {
-  document.getElementById("download-resume")?.addEventListener("click", () => {
+  const downloadBtn = document.getElementById("download-resume");
+  downloadBtn?.addEventListener("click", function () {
     const resumeElement = document.querySelector(".container");
     if (resumeElement) {
       const opt = {
@@ -57,7 +79,7 @@ function downloadResume(): void {
   });
 }
 
-// Function to enable editable sections within the resume
+// Function to make sections editable
 function makeSectionsEditable(): void {
   const editableElements = document.querySelectorAll("[contenteditable='true']");
   editableElements.forEach((element) => {
@@ -87,6 +109,6 @@ function generateShareableLink(): void {
 
 // Initializing the functions once the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("generate-resume-btn")?.addEventListener("click", updateName);
-  makeSectionsEditable();
+  const generateResumeBtn = document.getElementById("generate-resume-btn");
+  generateResumeBtn?.addEventListener("click", updateResume);
 });
