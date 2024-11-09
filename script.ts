@@ -1,65 +1,45 @@
+// Wait for the DOM to load before executing the script
 document.addEventListener("DOMContentLoaded", () => {
-  // Handle the Add More Skills Button
-  const addSkillBtn: HTMLElement | null = document.getElementById("add-skill-btn");
-  const additionalSkillsContainer: HTMLElement | null = document.getElementById("additional-skills");
+  const generateResumeBtn = document.getElementById("generate-resume-btn") as HTMLButtonElement;
+  const nameInput = document.getElementById("user-input") as HTMLInputElement;
+  const emailInput = document.getElementById("user-email") as HTMLInputElement;
+  const phoneInput = document.getElementById("user-phone") as HTMLInputElement;
+  const educationInput = document.getElementById("user-Education") as HTMLInputElement;
+  const experienceInput = document.getElementById("user-Experience") as HTMLInputElement;
+  const skillsInput = document.getElementById("skillsInput") as HTMLInputElement;
 
-  if (addSkillBtn && additionalSkillsContainer) {
-    addSkillBtn.addEventListener("click", () => {
-      // Create a new input element for adding additional skills
-      const skillInput: HTMLInputElement = document.createElement("input");
-      skillInput.type = "text";
-      skillInput.placeholder = "Enter additional skill";
-      additionalSkillsContainer.appendChild(skillInput);
-    });
-  }
+  const resumeSection = document.querySelector(".resume") as HTMLElement;
+  const skillsList = document.getElementById("skillsList") as HTMLUListElement;
 
-  // Generate Resume Button Logic
-  const generateResumeBtn: HTMLElement | null = document.getElementById("generate-resume-btn");
+  // Event listener for the "Generate Resume" button
+  generateResumeBtn.addEventListener("click", () => {
+    const name = nameInput.value;
+    const email = emailInput.value;
+    const phone = phoneInput.value;
+    const education = educationInput.value;
+    const experience = experienceInput.value;
+    const skills = skillsInput.value.split(",").map(skill => skill.trim());
 
-  if (generateResumeBtn) {
-    generateResumeBtn.addEventListener("click", () => {
-      // Retrieve user input for each section
-      const name: string = (document.getElementById("user-input") as HTMLInputElement).value;
-      const email: string = (document.getElementById("user-email") as HTMLInputElement).value;
-      const phone: string = (document.getElementById("user-phone") as HTMLInputElement).value;
-      const education: string = (document.getElementById("user-Education") as HTMLInputElement).value;
-      const experience: string = (document.getElementById("user-Experience") as HTMLInputElement).value;
-      const skills: string = (document.getElementById("skillsInput") as HTMLInputElement).value;
+    if (name && email && phone && education && experience && skills.length > 0) {
+      // Update the resume section with input values
+      document.getElementById("name")!.textContent = `Full Name: ${name}`;
+      document.getElementById("email")!.textContent = `Email: ${email}`;
+      document.getElementById("phone")!.textContent = `Phone: ${phone}`;
+      document.getElementById("user-edu")!.textContent = `Education: ${education}`;
+      document.getElementById("user-exp")!.textContent = `Experience: ${experience}`;
 
-      // Get additional skills from dynamically created input fields
-      const additionalSkills: string[] = Array.from(additionalSkillsContainer?.getElementsByTagName("input") || [])
-        .map((input: HTMLInputElement) => input.value)
-        .filter((value: string) => value !== "");
+      // Clear any existing skills and add new ones
+      skillsList.innerHTML = "";
+      skills.forEach(skill => {
+        const listItem = document.createElement("li");
+        listItem.textContent = skill;
+        skillsList.appendChild(listItem);
+      });
 
-      // Update the resume with the user's input
-      const nameElement: HTMLElement | null = document.getElementById("name");
-      const emailElement: HTMLElement | null = document.getElementById("email");
-      const phoneElement: HTMLElement | null = document.getElementById("phone");
-      const eduElement: HTMLElement | null = document.getElementById("user-edu");
-      const expElement: HTMLElement | null = document.getElementById("user-exp");
-
-      if (nameElement) nameElement.textContent = "Full Name: " + name;
-      if (emailElement) emailElement.textContent = "Email: " + email;
-      if (phoneElement) phoneElement.textContent = "Phone: " + phone;
-      if (eduElement) eduElement.textContent = "Education: " + education;
-      if (expElement) expElement.textContent = "Experience: " + experience;
-
-      // Combine the skills and display them on the resume
-      const allSkills: string[] = skills.split(",").concat(additionalSkills).filter((skill: string) => skill !== "");
-      const skillsList: HTMLElement | null = document.getElementById("skillsList");
-
-      if (skillsList) {
-        skillsList.innerHTML = ""; // Clear any previously displayed skills
-        allSkills.forEach((skill: string) => {
-          const li: HTMLLIElement = document.createElement("li");
-          li.textContent = skill;
-          skillsList.appendChild(li);
-        });
-      }
-
-      // Show the resume section after generation
-      const resumeSection: HTMLElement | null = document.querySelector(".resume");
-      if (resumeSection) resumeSection.style.display = "block";
-    });
-  }
+      // Display the resume section
+      resumeSection.style.display = "block";
+    } else {
+      alert("Please fill out all fields.");
+    }
+  });
 });
