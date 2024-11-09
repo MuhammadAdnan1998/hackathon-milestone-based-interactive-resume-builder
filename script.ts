@@ -3,6 +3,8 @@ declare var html2pdf: any;
 
 // Function to update the resume fields based on user input
 function updateName(): void {
+  if (typeof document === "undefined") return; // Check if document is defined for Node.js compatibility
+
   const userNameInput = (document.getElementById("user-input") as HTMLInputElement).value;
   const userEmailInput = (document.getElementById("user-email") as HTMLInputElement).value;
   const userPhoneInput = (document.getElementById("user-phone") as HTMLInputElement).value;
@@ -17,19 +19,13 @@ function updateName(): void {
   const userResume = document.querySelector(".resume") as HTMLElement;
   userResume.style.display = "block";
 
-  const nameParagraph = document.getElementById("name") as HTMLParagraphElement;
-  nameParagraph.textContent = userNameInput;
-  const emailParagraph = document.getElementById("email") as HTMLParagraphElement;
-  emailParagraph.textContent = userEmailInput;
-  const userPhone = document.getElementById("phone") as HTMLParagraphElement;
-  userPhone.textContent = userPhoneInput;
-  const userEdu = document.getElementById("user-edu") as HTMLParagraphElement;
-  userEdu.textContent = userEducationInput;
-  const userExp = document.getElementById("user-exp") as HTMLParagraphElement;
-  userExp.textContent = userExperienceInput;
+  (document.getElementById("name") as HTMLParagraphElement).textContent = userNameInput;
+  (document.getElementById("email") as HTMLParagraphElement).textContent = userEmailInput;
+  (document.getElementById("phone") as HTMLParagraphElement).textContent = userPhoneInput;
+  (document.getElementById("user-edu") as HTMLParagraphElement).textContent = userEducationInput;
+  (document.getElementById("user-exp") as HTMLParagraphElement).textContent = userExperienceInput;
 
-  const inputElement = document.getElementById("skillsInput") as HTMLInputElement;
-  const skillsInput = inputElement.value;
+  const skillsInput = (document.getElementById("skillsInput") as HTMLInputElement).value;
   const skillsArray = skillsInput.split(",").map((skill) => skill.trim()).filter((skill) => skill.length > 0);
   const listElement = document.getElementById("skillsList") as HTMLUListElement;
   listElement.innerHTML = "";
@@ -39,7 +35,6 @@ function updateName(): void {
     listElement.appendChild(listItem);
   });
 
-  // Adding event listeners for download and link generation
   downloadResume();
   makeSectionsEditable();
   document.getElementById("generate-link-btn")?.addEventListener("click", generateShareableLink);
@@ -47,6 +42,8 @@ function updateName(): void {
 
 // Function to enable downloading the resume as a PDF
 function downloadResume(): void {
+  if (typeof document === "undefined") return; // Check for browser environment
+
   const downloadBtn = document.getElementById("download-resume");
   downloadBtn?.addEventListener("click", function () {
     const resumeElement = document.querySelector(".container");
@@ -67,6 +64,8 @@ function downloadResume(): void {
 
 // Function to enable editable sections within the resume
 function makeSectionsEditable(): void {
+  if (typeof document === "undefined") return;
+
   const editableElements = document.querySelectorAll("[contenteditable='true']");
   editableElements.forEach((element) => {
     element.addEventListener("input", () => {
@@ -79,6 +78,8 @@ function makeSectionsEditable(): void {
 
 // Function to generate a shareable link for the resume
 function generateShareableLink(): void {
+  if (typeof document === "undefined" || typeof window === "undefined") return;
+
   const userName = (document.getElementById("name") as HTMLParagraphElement)?.textContent;
   if (userName?.trim()) {
     const encodedName = encodeURIComponent(userName.trim());
@@ -93,7 +94,9 @@ function generateShareableLink(): void {
   }
 }
 
-// Initializing the functions once the DOM is fully loaded
-document.addEventListener("DOMContentLoaded", () => {
-  makeSectionsEditable();
-});
+// Initializing the functions once the DOM is fully loaded (Browser Only)
+if (typeof document !== "undefined") {
+  document.addEventListener("DOMContentLoaded", () => {
+    makeSectionsEditable();
+  });
+}
