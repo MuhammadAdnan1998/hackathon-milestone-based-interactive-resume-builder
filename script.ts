@@ -108,9 +108,15 @@ function generateShareableLink(): void {
 // Initializing the functions once the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
   const generateResumeBtn = document.getElementById("generate-resume-btn");
-  generateResumeBtn?.addEventListener("click", updateResume);
-
-  // Set up the download event listener once the DOM is loaded
   const downloadBtn = document.getElementById("download-resume");
-  downloadBtn?.addEventListener("click", downloadResume);
+
+  // Ensure generate button listener is added
+  if (generateResumeBtn) {
+    generateResumeBtn.addEventListener("click", updateResume);
+  }
+
+  // Ensure download button listener is added
+  if (downloadBtn) {
+    downloadBtn.addEventListener("click", downloadResume);
+  }
 });
