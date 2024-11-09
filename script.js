@@ -2,8 +2,6 @@
 // Function to update the resume fields based on user input
 function updateName() {
     var _a;
-    if (typeof document === "undefined")
-        return; // Check if document is defined for Node.js compatibility
     const userNameInput = document.getElementById("user-input").value;
     const userEmailInput = document.getElementById("user-email").value;
     const userPhoneInput = document.getElementById("user-phone").value;
@@ -35,10 +33,8 @@ function updateName() {
 }
 // Function to enable downloading the resume as a PDF
 function downloadResume() {
-    if (typeof document === "undefined")
-        return; // Check for browser environment
-    const downloadBtn = document.getElementById("download-resume");
-    downloadBtn === null || downloadBtn === void 0 ? void 0 : downloadBtn.addEventListener("click", function () {
+    var _a;
+    (_a = document.getElementById("download-resume")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
         const resumeElement = document.querySelector(".container");
         if (resumeElement) {
             const opt = {
@@ -57,8 +53,6 @@ function downloadResume() {
 }
 // Function to enable editable sections within the resume
 function makeSectionsEditable() {
-    if (typeof document === "undefined")
-        return;
     const editableElements = document.querySelectorAll("[contenteditable='true']");
     editableElements.forEach((element) => {
         element.addEventListener("input", () => {
@@ -72,8 +66,6 @@ function makeSectionsEditable() {
 // Function to generate a shareable link for the resume
 function generateShareableLink() {
     var _a;
-    if (typeof document === "undefined" || typeof window === "undefined")
-        return;
     const userName = (_a = document.getElementById("name")) === null || _a === void 0 ? void 0 : _a.textContent;
     if (userName === null || userName === void 0 ? void 0 : userName.trim()) {
         const encodedName = encodeURIComponent(userName.trim());
@@ -88,9 +80,9 @@ function generateShareableLink() {
         alert("Please enter a valid username.");
     }
 }
-// Initializing the functions once the DOM is fully loaded (Browser Only)
-if (typeof document !== "undefined") {
-    document.addEventListener("DOMContentLoaded", () => {
-        makeSectionsEditable();
-    });
-}
+// Initializing the functions once the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", () => {
+    var _a;
+    (_a = document.getElementById("generate-resume-btn")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", updateName);
+    makeSectionsEditable();
+});

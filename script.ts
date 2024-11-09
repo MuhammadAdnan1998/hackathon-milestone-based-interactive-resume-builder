@@ -3,8 +3,6 @@ declare var html2pdf: any;
 
 // Function to update the resume fields based on user input
 function updateName(): void {
-  if (typeof document === "undefined") return; // Check if document is defined for Node.js compatibility
-
   const userNameInput = (document.getElementById("user-input") as HTMLInputElement).value;
   const userEmailInput = (document.getElementById("user-email") as HTMLInputElement).value;
   const userPhoneInput = (document.getElementById("user-phone") as HTMLInputElement).value;
@@ -42,10 +40,7 @@ function updateName(): void {
 
 // Function to enable downloading the resume as a PDF
 function downloadResume(): void {
-  if (typeof document === "undefined") return; // Check for browser environment
-
-  const downloadBtn = document.getElementById("download-resume");
-  downloadBtn?.addEventListener("click", function () {
+  document.getElementById("download-resume")?.addEventListener("click", () => {
     const resumeElement = document.querySelector(".container");
     if (resumeElement) {
       const opt = {
@@ -64,8 +59,6 @@ function downloadResume(): void {
 
 // Function to enable editable sections within the resume
 function makeSectionsEditable(): void {
-  if (typeof document === "undefined") return;
-
   const editableElements = document.querySelectorAll("[contenteditable='true']");
   editableElements.forEach((element) => {
     element.addEventListener("input", () => {
@@ -78,8 +71,6 @@ function makeSectionsEditable(): void {
 
 // Function to generate a shareable link for the resume
 function generateShareableLink(): void {
-  if (typeof document === "undefined" || typeof window === "undefined") return;
-
   const userName = (document.getElementById("name") as HTMLParagraphElement)?.textContent;
   if (userName?.trim()) {
     const encodedName = encodeURIComponent(userName.trim());
@@ -94,9 +85,8 @@ function generateShareableLink(): void {
   }
 }
 
-// Initializing the functions once the DOM is fully loaded (Browser Only)
-if (typeof document !== "undefined") {
-  document.addEventListener("DOMContentLoaded", () => {
-    makeSectionsEditable();
-  });
-}
+// Initializing the functions once the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("generate-resume-btn")?.addEventListener("click", updateName);
+  makeSectionsEditable();
+});

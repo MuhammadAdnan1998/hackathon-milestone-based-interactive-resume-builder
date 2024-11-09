@@ -1,151 +1,63 @@
-/* General Reset */
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   font-family: Arial, sans-serif;
 }
 
-.header{
-  justify-content: center; 
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f2f5;
 }
 
-/* Main Container */
 .container {
-  max-width: 800px;
-  margin: 20px auto;
+  text-align: center;
+  width: 90%;
+  max-width: 600px;
   padding: 20px;
-  border: 1px solid #ddd;
+  background: white;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
 }
 
-/* Form and Input Styling */
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  font-weight: bold;
-  margin-bottom: 5px;
-  color: #333;
-}
-
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group input[type="tel"] {
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-.form-group input[type="text"]:focus,
-.form-group input[type="email"]:focus,
-.form-group input[type="tel"]:focus {
-  border-color: #007bff;
-  outline: none;
-}
-
-/* Buttons */
-.button {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 10px;
-  justify-content: center;
-}
-
-.button:hover {
-  background-color: #0056b3;
-}
-
-.button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-#download-resume {
-  margin-right: 10px;
-}
-
-/* Resume Section */
-.resume {
-  display: none;
-  margin-top: 20px;
-  padding: 20px;
-  border-top: 2px solid #007bff;
-}
-
-.resume h2 {
-  font-size: 24px;
-  color: #333;
+h1 {
   margin-bottom: 10px;
 }
 
-.resume p {
-  font-size: 18px;
-  color: #555;
+p {
+  margin-bottom: 15px;
 }
 
-.resume ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.resume ul li {
-  font-size: 16px;
-  color: #333;
-  padding: 4px 0;
-}
-
-#skillsList li {
-  background-color: #f0f0f0;
+.form-section input {
+  width: 100%;
+  margin: 5px 0;
+  padding: 8px;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  padding: 5px;
-  margin: 4px 0;
 }
 
-/* Editable Content */
-[contenteditable="true"] {
-  padding: 4px;
-  border-bottom: 1px dashed #ccc;
-  transition: background-color 0.2s;
-}
-
-[contenteditable="true"]:focus {
-  background-color: #e8f0fe;
-  outline: none;
-}
-
-/* Shareable Link Section */
-#shareable-link {
+button {
   margin-top: 10px;
-  font-size: 14px;
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.resume {
+  margin-top: 20px;
 }
 
 #shareable-link a {
   color: #007bff;
   text-decoration: none;
-}
-
-#shareable-link a:hover {
-  text-decoration: underline;
-}
-
-/* Footer */
-.footer {
-  margin-top: 20px;
-  text-align: center;
-  font-size: 14px;
-  color: #888;
 }
