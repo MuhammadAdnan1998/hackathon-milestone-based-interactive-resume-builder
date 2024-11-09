@@ -11,36 +11,28 @@
     <h1>Create Your Professional Resume</h1>
     <p>Fill in your details and generate a downloadable, shareable resume.</p>
     <div class="form-section">
-      <label for="user-input" class="input-label">Full Name</label>
       <input type="text" id="user-input" placeholder="Enter Your Name">
-
-      <label for="user-email" class="input-label">Email</label>
       <input type="email" id="user-email" placeholder="Enter Your Email">
-
-      <label for="user-phone" class="input-label">Phone Number</label>
       <input type="tel" id="user-phone" placeholder="Enter Your Phone">
-
-      <label for="user-Education" class="input-label">Education</label>
       <input type="text" id="user-Education" placeholder="Enter Your Education">
-
-      <label for="user-Experience" class="input-label">Experience</label>
       <input type="text" id="user-Experience" placeholder="Enter Your Experience">
-
-      <label for="skillsInput" class="input-label">Skills</label>
       <input type="text" id="skillsInput" placeholder="Enter Skills (comma separated)">
-      
       <button id="generate-resume-btn">Generate Resume</button>
     </div>
     
     <div class="resume" style="display: none;">
       <h2>Resume</h2>
-      <p id="name"></p>
-      <p id="email"></p>
-      <p id="phone"></p>
-      <p id="user-edu"></p>
-      <p id="user-exp"></p>
+      <p id="name" contenteditable="true">Full Name: John Doe</p>
+      <p id="email" contenteditable="true">Email: john@example.com</p>
+      <p id="phone" contenteditable="true">Phone: 123-456-7890</p>
+      <p id="user-edu" contenteditable="true">Education: Bachelors in Computer Science</p>
+      <p id="user-exp" contenteditable="true">Experience: Software Developer at XYZ Corp</p>
       <h3>Skills</h3>
-      <ul id="skillsList"></ul>
+      <ul id="skillsList" contenteditable="true">
+        <li>JavaScript</li>
+        <li>TypeScript</li>
+        <li>React.js</li>
+      </ul>
       <button id="download-resume">Download PDF</button>
       <button id="generate-link-btn">Generate Shareable Link</button>
       <div id="shareable-link"></div>
