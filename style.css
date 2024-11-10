@@ -194,7 +194,7 @@ body {
     /* border:2px solid chartreuse; */
     font-size: 2rem;
     padding: 0.5rem 0rem;
-    border-bottom: 2px solid var(--blue);
+    border-bottom: 2px solid var(--l-gray);
     font-weight: bold;
   }
   /* ============================================ MEDIA QUERIES ============================================= */
@@ -212,7 +212,7 @@ body {
   
     .input {
       padding: 1rem 1rem;
-      border: 2px solid var(--l-gray);
+      border: 2px solid var(--black);
       border-radius: 0.4rem;
       font-size: 0.8rem;
       width: 50%;
