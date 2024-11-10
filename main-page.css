@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100..900&display=swap");
+
+/* ========= GLOBAL STYLES ================ */
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: #f4f6ff;
+  font-family: "Poppins", sans-serif;
+}
+
+:root {
+  --gray: #f4f6ff;
+  --purple: #9b6fcc;
+  --purple-d: #8853c4;
+}
+
+/* ========= NAVBAR ================ */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.3rem 0;
+  background-color: white;
+  width: 100%;
+  box-shadow: 0px 0.5px 7px rgba(0, 0, 0, 0.183);
+}
+
+.gen-button {
+  background-color: var(--purple-d);
+  color: white;
+  padding: 0.7rem 1.5rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.gen-button:active {
+  background-color: var(--purple);
+}
+
+.logo {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.4rem;
+  margin-left: 2rem;
+}
+
+.logo img {
+  width: 3rem;
+  height: 3rem;
+}
+
+/* ========= HERO SECTION ================ */
+.hero {
+  display: flex;
+  gap: 3rem;
+  background: url("/img/hero-bg.jpg") center/cover no-repeat;
+}
+
+.hero .first {
+  width: 50%;
+  padding: 2rem;
+}
+
+.hero .first h1 {
+  font-size: 3rem;
+  line-height: 4rem;
+}
+
+.hero .first p {
+  font-size: 1.2rem;
+}
+
+.hero .second {
+  width: 50vw;
+}
+
+.hero .second img {
+  width: 85%;
+}
+
+/* ========= MEDIA QUERIES ================ */
+@media only screen and (max-width: 600px) {
+  .gen-button {
+    display: none;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+    gap: 6px;
+    margin-left: 0.9rem;
+  }
+
+  .navbar {
+    padding: 0.9rem 0;
+  }
+
+  .hero {
+    flex-direction: column;
+  }
+
+  .hero .first {
+    width: 90vw;
+    font-size: 10px;
+    padding: 0.9rem;
+    line-height: 1.2rem;
+  }
+
+  .hero .first p {
+    margin-bottom: 1.5rem;
+    font-size: 0.8rem;
+  }
+
+  .hero .first h1 {
+    font-size: 1.9rem;
+    line-height: 2.5rem;
+  }
+
+  .hero .second {
+    width: 100vw;
+  }
+
+  .hero .second img {
+    width: 90%;
+  }
+}
