@@ -3,33 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Awesome Resume Builder</title>
+  <title>Exceptional Resume Creator</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <h1 class="main-page-heading">Enter Your Resume</h1>
+  <h1 class="main-page-heading">Submit Your Resume Information</h1>
   
   <div class="input-form">
     <input class="input" type="text" id="user-input" placeholder="Enter your Name..." required />
     <input class="input" type="text" id="user-email" placeholder="Enter your Email..." />
     <input class="input" type="text" id="user-phone" placeholder="Enter your Phone..." />
-    <input class="input" type="text" id="skillsInput" placeholder="Enter skills (comma separated)" />
+    <input class="input" type="text" id="skillsInput" placeholder="Enter skills ( Like HTML5,CSS3, JavaScript with comma separated)" />
     <input class="input" type="text" id="user-Education" placeholder="Enter your Education..." />
     <input class="input" type="text" id="user-Experience" placeholder="Enter your Experience..." />
     
     <input class="input" type="file" id="imageUpload" accept="image/*" onchange="displayImage()" />
 
     <div class="dialogue">
-      <p>Your Resume will be Generated Below After Submission <img class="sticker" src="/img/giphy.jpg" alt="jpg" /></p>
+      <p>Your resume will be created below upon submission. <img class="sticker" src="/img/giphy.jpg" alt="jpg" /></p>
     </div>
     
-    <button class="generate-btn" onclick="updateName()">Generate Resume</button>
+    <button class="generate-btn" onclick="updateName()">Create Resume</button>
   </div>
 
   <div class="resume">
     <h1>Your Resume</h1>
-    <p class="editable">Your Resume is Editable by Clicking on Any Section You Want to Edit :)</p>
+    <p class="editable">You can edit your resume by simply clicking on any section you'd like to update. :)</p>
 
     <div class="container">
       <div class="left-info">
@@ -38,11 +38,11 @@
         </div>
         
         <div class="item-col">
-          <span class="heading">Email:</span>
+          <span class="heading">Email Address:</span>
           <p id="email" contenteditable="true"></p>
         </div>
         <div class="item">
-          <span class="heading">Phone:</span>
+          <span class="heading">Phone Number:</span>
           <p id="phone" contenteditable="true"></p>
         </div>
       </div>
@@ -51,24 +51,24 @@
         <p id="name" contenteditable="true"></p>
         
         <div class="item-col">
-          <div class="title">Education</div>
+          <div class="title">Educational Information:</div>
           <p id="user-edu" contenteditable="true"></p>
         </div>
         
         <div class="item-col">
-          <div class="title">Experience</div>
+          <div class="title">Professional Experience:</div>
           <p id="user-exp" contenteditable="true"></p>
         </div>
 
         <div class="item-col skills">
-          <div class="title">Skills</div>
+          <div class="title">Core Competencies:</div>
           <ul id="skillsList" contenteditable="true"></ul>
         </div>
       </div>
     </div>
 
     <div class="download-section">
-      <button id="download-resume">Download Resume</button>
+      <button id="download-resume">Download Your Resume</button>
     </div>
   </div>
 
