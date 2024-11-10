@@ -1,5 +1,5 @@
 {
-  "name": "resume-builder",
+  "name": "hackathon-milestone-based-interactive-resume-builder",
   "version": "1.0.0",
   "description": "\"# Hackathon-Milestone-Based-Interactive-Resume-Builder\"",
   "main": "index.js",
@@ -8,11 +8,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/jspdf": "^2.0.0"
-  },
-  "dependencies": {
-    "html2pdf.js": "^0.10.2"
-  }
+  "license": "ISC"
 }

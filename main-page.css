@@ -1,114 +1,108 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap");
 
-/* ========= GLOBAL STYLES ================ */
+/* ========= NAVBAR ================ */
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  background-color: #f4f6ff;
-  font-family: "Poppins", sans-serif;
+  background-color: var(--gray);
 }
-
 :root {
   --gray: #f4f6ff;
   --purple: #9b6fcc;
   --purple-d: #8853c4;
 }
-
-/* ========= NAVBAR ================ */
 .navbar {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 1.3rem 0;
+  align-items: center;
+  justify-content: space-between;
   background-color: white;
-  width: 100%;
+  width: 100vw;
   box-shadow: 0px 0.5px 7px rgba(0, 0, 0, 0.183);
 }
-
 .gen-button {
+  text-decoration: none;
+  border-radius: 0.2rem;
+  cursor: pointer;
   background-color: var(--purple-d);
   color: white;
   padding: 0.7rem 1.5rem;
-  border-radius: 0.2rem;
-  cursor: pointer;
-  text-decoration: none;
+  margin-right: 2rem;
 }
-
 .gen-button:active {
   background-color: var(--purple);
 }
-
 .logo {
+  margin-left: 2rem;
   display: flex;
   gap: 10px;
-  align-items: center;
-  font-weight: bold;
   font-size: 1.4rem;
-  margin-left: 2rem;
+  font-weight: bold;
+  align-items: center;
 }
-
 .logo img {
+  /* margin-top: -4px; */
   width: 3rem;
   height: 3rem;
 }
-
-/* ========= HERO SECTION ================ */
 .hero {
   display: flex;
+  height: auto;
   gap: 3rem;
   background: url("/img/hero-bg.jpg") center/cover no-repeat;
 }
-
 .hero .first {
-  width: 50%;
   padding: 2rem;
+  line-height: 2rem;
+  width: 50%;
 }
-
+.hero .first p {
+  font-size: 1.2rem;
+}
 .hero .first h1 {
   font-size: 3rem;
   line-height: 4rem;
 }
-
-.hero .first p {
-  font-size: 1.2rem;
-}
-
 .hero .second {
   width: 50vw;
 }
-
 .hero .second img {
   width: 85%;
 }
 
-/* ========= MEDIA QUERIES ================ */
+/* ========================= MEDIA QUERIES ========================= */
+
 @media only screen and (max-width: 600px) {
-  .gen-button {
+  nav .gen-button {
     display: none;
   }
-
   .logo {
-    font-size: 1.2rem;
-    gap: 6px;
     margin-left: 0.9rem;
+    display: flex;
+    gap: 6px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    align-items: center;
   }
-
+  .logo img {
+    margin-top: -4px;
+    width: 3rem;
+    height: 3rem;
+  }
   .navbar {
     padding: 0.9rem 0;
   }
-
   .hero {
+    display: flex;
     flex-direction: column;
   }
-
-  .hero .first {
-    width: 90vw;
-    font-size: 10px;
-    padding: 0.9rem;
-    line-height: 1.2rem;
-  }
-
   .hero .first p {
     margin-bottom: 1.5rem;
     font-size: 0.8rem;
@@ -118,11 +112,15 @@ body {
     font-size: 1.9rem;
     line-height: 2.5rem;
   }
-
+  .hero .first {
+    padding: 0.9rem;
+    line-height: 1.2rem;
+    font-size: 10px;
+    width: 90vw;
+  }
   .hero .second {
     width: 100vw;
   }
-
   .hero .second img {
     width: 90%;
   }

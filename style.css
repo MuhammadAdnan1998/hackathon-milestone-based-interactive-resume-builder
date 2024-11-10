@@ -1,0 +1,294 @@
+body {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #f6f6f6;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  :root {
+    --blue: #009fbd;
+    --l-blue: #0bbcdf;
+    --l-gray: #b9b9b9;
+  }
+  
+  .input {
+    padding: 1rem 2rem;
+    border: 1px solid var(--l-gray);
+    border-radius: 0.2rem;
+    font-size: 1rem;
+    width: 95%;
+  }
+  .input-form {
+    /* background: white; */
+    /* box-shadow: 0 7px 20px rgba(0, 0, 0, 0.094); */
+    border-radius: 0.2rem;
+    padding: 2rem 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    width: 90vw;
+    align-items: flex-start;
+  }
+  
+  .generate-btn {
+    width: auto;
+    border: none;
+    color: white;
+    background: var(--blue);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+  }
+  
+  .generate-btn:active {
+    background: var(--l-blue);
+  }
+  .generate-btn:hover {
+    scale: 110%;
+    transition-duration: 0.2s;
+    background: var(--l-blue);
+  }
+  #generate-link-btn {
+    width: auto;
+    border: none;
+    color: white;
+    background: var(--blue);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+  }
+  #generate-link-btn:active {
+    background: var(--l-blue);
+  }
+  #generate-link-btn:hover {
+    scale: 110%;
+    transition-duration: 0.2s;
+    background: var(--l-blue);
+  }
+  #download-resume {
+    width: auto;
+    border: none;
+    color: white;
+    background: var(--blue);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+  }
+  #download-resume:hover {
+    scale: 110%;
+    transition-duration: 0.2s;
+    background: var(--l-blue);
+  }
+  .download-section {
+    width: 100%;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0rem;
+  }
+  .dialogue {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sticker {
+    width: 2rem;
+  }
+  #user-edu {
+    padding: 1rem 0rem;
+  }
+  .main-page-heading {
+    font-size: 3rem;
+  }
+  h1 {
+    text-align: center;
+  }
+  .resume {
+    margin: 2rem 2rem;
+    width: 70vw;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .container {
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.502);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+  }
+  .left-info {
+    display: flex;
+    padding: 1.4rem;
+    width: 40%;
+    top: 0;
+    min-height: 63rem;
+    height: auto;
+    color: white;
+    flex-direction: column;
+    gap: 0.7rem;
+    background-color: #0bbcdf;
+    /* border: 2px solid green; */
+  }
+  .right-info {
+    background: white;
+    display: flex;
+    padding: 1.4rem;
+    width: 100%;
+    min-height: 63rem;
+    height: auto;
+    flex-direction: column;
+    gap: 0.7rem;
+    /* border: 2px solid green; */
+  }
+  .input-form .input {
+    width: 70%;
+  }
+  .editable {
+    width: 100%;
+    text-align: center;
+    margin: 2rem 0rem;
+    color: #5a5a5a;
+  }
+  p {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  .item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 7px;
+  }
+  #name {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  .profile-cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #profile-image {
+    border-radius: 50%;
+  }
+  .item-col {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .heading {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  .title {
+    /* border:2px solid chartreuse; */
+    font-size: 2rem;
+    padding: 0.5rem 0rem;
+    border-bottom: 2px solid var(--blue);
+    font-weight: bold;
+  }
+  /* ============================================ MEDIA QUERIES ============================================= */
+  @media only screen and (max-width: 600px) {
+    .title {
+      font-size: 1rem;
+    }
+    .heading {
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+    .main-page-heading {
+      font-size: 1.2rem;
+    }
+  
+    .input {
+      padding: 1rem 1rem;
+      border: 2px solid var(--l-gray);
+      border-radius: 0.4rem;
+      font-size: 0.8rem;
+      width: 50%;
+    }
+  
+    .generate-btn {
+      font-size: 0.9rem;
+      padding: 0.7rem 1rem;
+    }
+  
+    #download-resume {
+      font-size: 0.9rem;
+      padding: 0.7rem 1rem;
+    }
+    .heading {
+      font-size: 0.5rem;
+      font-weight: bold;
+    }
+    .left-info {
+      display: flex;
+      padding: 0.5rem;
+      width: 30%;
+      margin-top: 5rem;
+      min-height: 25rem;
+      gap: 0.7rem;
+    }
+  
+    #skillsList {
+      display: none;
+      background-color: aqua;
+      border: 2px solid black;
+    }
+    .right-info {
+      display: flex;
+      padding: 0.5rem;
+      width: 100%;
+      min-height: 25rem;
+      height: auto;
+      flex-direction: column;
+      gap: 0.7rem;
+      /* border: 2px solid green; */
+    }
+    .resume {
+      padding: 2rem 1rem;
+      width: 90vw;
+  
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      /* display: none; */
+    }
+    .editable {
+      font-size: 0.8rem;
+    }
+    .container {
+      align-items: start;
+      justify-content: start;
+    }
+    .item {
+      justify-content: start;
+      align-items: start;
+    }
+    #name {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+    p {
+      margin: 0;
+      font-size: 0.5rem;
+    }
+    #email {
+      font-size: 0.4rem;
+    }
+    ul {
+      font-size: 0.5rem;
+    }
+  }
+  
