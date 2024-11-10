@@ -45,36 +45,36 @@ body {
   }
   
   .generate-btn:active {
-    background: var(--l-blue);
+    background: var(--l-gray);
   }
   .generate-btn:hover {
     scale: 110%;
     transition-duration: 0.2s;
-    background: var(--l-blue);
+    background: var(--l-gray);
   }
   #generate-link-btn {
     width: auto;
     border: none;
     color: white;
-    background: var(--blue);
+    background: var(--l-gray);
     border-radius: 0.5rem;
     cursor: pointer;
     font-size: 1.5rem;
     padding: 1rem 2rem;
   }
   #generate-link-btn:active {
-    background: var(--l-blue);
+    background: var(--l-gray);
   }
   #generate-link-btn:hover {
     scale: 110%;
     transition-duration: 0.2s;
-    background: var(--l-blue);
+    background: var(--l-gray);
   }
   #download-resume {
     width: auto;
     border: none;
     color: white;
-    background: var(--blue);
+    background: var(--l-gray);
     border-radius: 0.5rem;
     cursor: pointer;
     font-size: 1.5rem;
@@ -83,7 +83,7 @@ body {
   #download-resume:hover {
     scale: 110%;
     transition-duration: 0.2s;
-    background: var(--l-blue);
+    background: var(--l-gray);
   }
   .download-section {
     width: 100%;
@@ -242,7 +242,7 @@ body {
   
     #skillsList {
       display: none;
-      background-color: aqua;
+      background-color: rgb(129, 134, 134);
       border: 2px solid black;
     }
     .right-info {
