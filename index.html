@@ -8,15 +8,15 @@
 </head>
 <body>
   <div class="container">
-    <h1>Create Your Professional Resume</h1>
-    <p>Fill in your details and generate a downloadable, shareable resume.</p>
+    <h1>Create Your Resume</h1>
+    <p>Enter your details to create a resume.</p>
     <div class="form-section">
-      <input type="text" id="user-input" placeholder="Enter Your Name">
-      <input type="email" id="user-email" placeholder="Enter Your Email">
-      <input type="tel" id="user-phone" placeholder="Enter Your Phone">
-      <input type="text" id="user-Education" placeholder="Enter Your Education">
-      <input type="text" id="user-Experience" placeholder="Enter Your Experience">
-      <input type="text" id="skillsInput" placeholder="Enter Skills (comma separated)">
+      <input type="text" id="user-input" placeholder="Name">
+      <input type="email" id="user-email" placeholder="Email">
+      <input type="tel" id="user-phone" placeholder="Phone">
+      <input type="text" id="user-education" placeholder="Education">
+      <input type="text" id="user-experience" placeholder="Experience">
+      <input type="text" id="skills-input" placeholder="Skills (comma-separated)">
       <button id="generate-resume-btn">Generate Resume</button>
     </div>
     
@@ -25,12 +25,12 @@
       <p id="name"></p>
       <p id="email"></p>
       <p id="phone"></p>
-      <p id="user-edu"></p>
-      <p id="user-exp"></p>
+      <p id="education"></p>
+      <p id="experience"></p>
       <h3>Skills</h3>
-      <ul id="skillsList"></ul>
+      <ul id="skills-list"></ul>
       <button id="download-resume">Download PDF</button>
-      <button id="generate-link-btn">Generate Shareable Link</button>
+      <button id="generate-link-btn">Generate Link</button>
       <div id="shareable-link"></div>
     </div>
   </div>

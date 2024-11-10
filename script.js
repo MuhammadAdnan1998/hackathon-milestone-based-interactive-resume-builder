@@ -1,104 +1,66 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-function isValidPhone(phone) {
-    const phoneRegex = /^[0-9]+$/;
-    return phoneRegex.test(phone);
-}
-// Function to update the resume fields based on user input
+var html2pdf;
 function updateResume() {
-    const userNameInput = document.getElementById("user-input").value;
-    const userEmailInput = document.getElementById("user-email").value;
-    const userPhoneInput = document.getElementById("user-phone").value;
-    const userEducationInput = document.getElementById("user-Education").value;
-    const userExperienceInput = document.getElementById("user-Experience").value;
-    // Validation checks for email and phone
-    if (!userNameInput.trim() || !userEmailInput.trim() || !userPhoneInput.trim() || !userEducationInput.trim()) {
-        alert("Please fill in all required fields.");
+    const getInputValue = (id) => document.getElementById(id).value.trim();
+    const userName = getInputValue("user-input");
+    const userEmail = getInputValue("user-email");
+    const userPhone = getInputValue("user-phone");
+    const userEducation = getInputValue("user-Education");
+    const userExperience = getInputValue("user-Experience");
+    if (!userName || !userEmail || !userPhone || !userEducation) {
+        alert("Please fill out all required fields");
         return;
     }
-    if (!isValidEmail(userEmailInput)) {
-        alert("Please enter a valid email address.");
-        return;
-    }
-    if (!isValidPhone(userPhoneInput)) {
-        alert("Please enter a valid phone number (only numbers).");
-        return;
-    }
-    const userResume = document.querySelector(".resume");
-    userResume.style.display = "block";
-    // Update resume fields
-    document.getElementById("name").textContent = userNameInput;
-    document.getElementById("email").textContent = userEmailInput;
-    document.getElementById("phone").textContent = userPhoneInput;
-    document.getElementById("user-edu").textContent = userEducationInput;
-    document.getElementById("user-exp").textContent = userExperienceInput;
-    // Skills
-    const skillsInput = document.getElementById("skillsInput").value;
-    const skillsArray = skillsInput.split(",").map((skill) => skill.trim()).filter((skill) => skill.length > 0);
-    const listElement = document.getElementById("skillsList");
-    listElement.innerHTML = "";
-    skillsArray.forEach((skill) => {
+    // Display resume
+    document.querySelector(".resume")?.classList.add("show");
+    // Update resume content
+    document.getElementById("name").textContent = userName;
+    document.getElementById("email").textContent = userEmail;
+    document.getElementById("phone").textContent = userPhone;
+    document.getElementById("user-edu").textContent = userEducation;
+    document.getElementById("user-exp").textContent = userExperience;
+    // Display skills as list items
+    const skillsList = document.getElementById("skillsList");
+    skillsList.innerHTML = "";
+    getInputValue("skillsInput")
+        .split(",")
+        .map((skill) => skill.trim())
+        .filter(Boolean)
+        .forEach((skill) => {
         const listItem = document.createElement("li");
         listItem.textContent = skill;
-        listElement.appendChild(listItem);
+        skillsList.appendChild(listItem);
     });
-    makeSectionsEditable();
-    // Setup event listener for shareable link
-    document.getElementById("generate-link-btn")?.addEventListener("click", generateShareableLink);
-}
-// Function to enable downloading the resume as a PDF
-function downloadResume() {
-    const resumeElement = document.querySelector(".container");
-    if (resumeElement) {
-        const opt = {
-            margin: 1,
-            filename: "My-Resume.pdf",
-            image: { type: "jpeg", quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-        };
-        html2pdf().from(resumeElement).set(opt).save();
-    }
-    else {
-        alert("Resume element not found!");
-    }
-}
-// Function to make sections editable
-function makeSectionsEditable() {
-    const editableElements = document.querySelectorAll("[contenteditable='true']");
-    editableElements.forEach((element) => {
+    // Download Resume as PDF
+    document.getElementById("download-resume")?.addEventListener("click", () => {
+        const resumeElement = document.querySelector(".container");
+        if (resumeElement) {
+            html2pdf().from(resumeElement).set({
+                margin: 1,
+                filename: "Resume.pdf",
+                image: { type: "jpeg", quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+            }).save();
+        }
+        else {
+            alert("Resume element not found!");
+        }
+    });
+    // Editable Sections Logging
+    document.querySelectorAll("[contenteditable='true']").forEach((element) => {
         element.addEventListener("input", () => {
-            const elementId = element.id;
-            const updatedContent = element.textContent?.trim() || "";
-            console.log(`Updated ${elementId}: ${updatedContent}`);
+            console.log(`Updated ${element.id}: ${(element.textContent || "").trim()}`);
         });
     });
-}
-// Function to generate a shareable link for the resume
-function generateShareableLink() {
-    const userName = document.getElementById("name")?.textContent;
-    if (userName?.trim()) {
-        const encodedName = encodeURIComponent(userName.trim());
-        const currentUrl = window.location.href.split('?')[0];
-        const shareableLink = `${currentUrl}?user=${encodedName}`;
+    // Generate Shareable Link
+    document.getElementById("generate-link-btn")?.addEventListener("click", () => {
+        const userNameEncoded = encodeURIComponent(userName);
+        const link = `${window.location.href.split('?')[0]}?user=${userNameEncoded}`;
         const linkElement = document.getElementById("shareable-link");
-        if (linkElement) {
-            linkElement.innerHTML = `<a href="${shareableLink}" target="_blank">${shareableLink}</a>`;
-        }
-    }
-    else {
-        alert("Please enter a valid username.");
-    }
+        if (linkElement)
+            linkElement.innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
+    });
 }
-// Initializing the functions once the DOM is fully loaded
-document.addEventListener("DOMContentLoaded", () => {
-    const generateResumeBtn = document.getElementById("generate-resume-btn");
-    generateResumeBtn?.addEventListener("click", updateResume);
-    // Set up the download event listener once the DOM is loaded
-    const downloadBtn = document.getElementById("download-resume");
-    downloadBtn?.addEventListener("click", downloadResume);
-});
+document.addEventListener("DOMContentLoaded", updateResume);
