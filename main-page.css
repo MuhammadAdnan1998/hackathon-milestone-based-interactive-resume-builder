@@ -31,13 +31,13 @@ body {
   text-decoration: none;
   border-radius: 0.2rem;
   cursor: pointer;
-  background-color: var(--purple-d);
+  background-color: var(--gray);
   color: white;
   padding: 0.7rem 1.5rem;
   margin-right: 2rem;
 }
 .gen-button:active {
-  background-color: var(--purple);
+  background-color: var(--gray);
 }
 .logo {
   margin-left: 2rem;
