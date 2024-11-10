@@ -10,7 +10,7 @@ body {
   }
   :root {
     --blue: #009fbd;
-    --l-blue: #0bbcdf;
+    --l-blue: #113941;
     --l-gray: #b9b9b9;
   }
   
@@ -136,7 +136,7 @@ body {
     color: white;
     flex-direction: column;
     gap: 0.7rem;
-    background-color: #41aabd;
+    background-color: #102f35;
     /* border: 2px solid green; */
   }
   .right-info {
@@ -242,7 +242,7 @@ body {
   
     #skillsList {
       display: none;
-      background-color: rgb(129, 134, 134);
+      background-color: rgb(117, 121, 121);
       border: 2px solid black;
     }
     .right-info {
