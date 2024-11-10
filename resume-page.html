@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Awesome Resume Builder</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <h1 class="main-page-heading">Enter Your Resume</h1>
+  
+  <div class="input-form">
+    <input class="input" type="text" id="user-input" placeholder="Enter your Name..." required />
+    <input class="input" type="text" id="user-email" placeholder="Enter your Email..." />
+    <input class="input" type="text" id="user-phone" placeholder="Enter your Phone..." />
+    <input class="input" type="text" id="skillsInput" placeholder="Enter skills (comma separated)" />
+    <input class="input" type="text" id="user-Education" placeholder="Enter your Education..." />
+    <input class="input" type="text" id="user-Experience" placeholder="Enter your Experience..." />
+    
+    <input class="input" type="file" id="imageUpload" accept="image/*" onchange="displayImage()" />
+
+    <div class="dialogue">
+      <p>Your Resume will be Generated Below After Submission <img class="sticker" src="/img/giphy.gif" alt="gif" /></p>
+    </div>
+    
+    <button class="generate-btn" onclick="updateName()">Generate Resume</button>
+  </div>
+
+  <div class="resume">
+    <h1>Your Resume</h1>
+    <p class="editable">Your Resume is Editable by Clicking on Any Section You Want to Edit :)</p>
+
+    <div class="container">
+      <div class="left-info">
+        <div class="profile-cont">
+          <img id="profile-image" src="" alt="Profile Image" style="width: 200px; height: 200px; object-fit: cover" />
+        </div>
+        
+        <div class="item-col">
+          <span class="heading">Email:</span>
+          <p id="email" contenteditable="true"></p>
+        </div>
+        <div class="item">
+          <span class="heading">Phone:</span>
+          <p id="phone" contenteditable="true"></p>
+        </div>
+      </div>
+
+      <div class="right-info">
+        <p id="name" contenteditable="true"></p>
+        
+        <div class="item-col">
+          <div class="title">Education</div>
+          <p id="user-edu" contenteditable="true"></p>
+        </div>
+        
+        <div class="item-col">
+          <div class="title">Experience</div>
+          <p id="user-exp" contenteditable="true"></p>
+        </div>
+
+        <div class="item-col skills">
+          <div class="title">Skills</div>
+          <ul id="skillsList" contenteditable="true"></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="download-section">
+      <button id="download-resume">Download Resume</button>
+    </div>
+  </div>
+
+  <script>
+    // Display uploaded image
+    function displayImage() {
+      const file = document.getElementById("imageUpload").files[0];
+      const reader = new FileReader();
+      reader.onloadend = () => document.getElementById("profile-image").src = reader.result;
+      if (file) reader.readAsDataURL(file);
+    }
+
+    // Download resume
+    document.getElementById("download-resume").addEventListener("click", () => {
+      html2pdf().from(document.body).save();
+    });
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

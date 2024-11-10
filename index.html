@@ -1,40 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Resume Builder</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/img/icon.png" type="image/x-icon" />
+  <title>Free Resume Builder | Make and Download Easily</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <div class="container">
-    <h1>Create Your Resume</h1>
-    <p>Enter your details to create a resume.</p>
-    <div class="form-section">
-      <input type="text" id="user-input" placeholder="Name">
-      <input type="email" id="user-email" placeholder="Email">
-      <input type="tel" id="user-phone" placeholder="Phone">
-      <input type="text" id="user-education" placeholder="Education">
-      <input type="text" id="user-experience" placeholder="Experience">
-      <input type="text" id="skills-input" placeholder="Skills (comma-separated)">
-      <button id="generate-resume-btn">Generate Resume</button>
+<body class="poppins-regular">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="/img/icon.png" alt="BeeResume Logo" /> BeeResume
     </div>
-    
-    <div class="resume" style="display: none;">
-      <h2>Resume</h2>
-      <p id="name"></p>
-      <p id="email"></p>
-      <p id="phone"></p>
-      <p id="education"></p>
-      <p id="experience"></p>
-      <h3>Skills</h3>
-      <ul id="skills-list"></ul>
-      <button id="download-resume">Download PDF</button>
-      <button id="generate-link-btn">Generate Link</button>
-      <div id="shareable-link"></div>
+    <a href="/resume-page.html" class="gen-button">Create Yours Now</a>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="first">
+      <h1>BeeResume: The Best CV Maker Online</h1>
+      <p>
+        Craft a professional resume that sets you apart. Join thousands who achieved their career goals with our easy-to-use tools!
+      </p>
+      <a class="gen-button" href="/resume-page.html">Create Now</a>
     </div>
-  </div>
-  <script src="script.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <div class="second">
+      <img src="/img/hero-img.png" alt="Hero Image">
+    </div>
+  </section>
 </body>
 </html>
