@@ -37,7 +37,7 @@ body {
     width: auto;
     border: none;
     color: white;
-    background: var(--blue);
+    background: var(--l-gray);
     border-radius: 0.5rem;
     cursor: pointer;
     font-size: 1.5rem;
