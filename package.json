@@ -1,18 +1,18 @@
 {
-  "name": "milestoneone-static-interactiver-resume-builder",
+  "name": "resume-builder",
   "version": "1.0.0",
+  "description": "\"# Hackathon-Milestone-Based-Interactive-Resume-Builder\"",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "devDependencies": {
-    "typescript": "^5.5.4"
+    "@types/jspdf": "^2.0.0"
   },
   "dependencies": {
-    "html2pdf.js": "^0.10.2",
-    "jsdom": "^25.0.1"
+    "html2pdf.js": "^0.10.2"
   }
 }
